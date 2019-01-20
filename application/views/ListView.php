@@ -8,11 +8,11 @@
 			<?php foreach ($names as $row) { ?>
 
 				<tr>
-					<td><?= $row->wishListId ?></td>
-					<td><?= $row->userId ?></td>
-					<td><?= $row->wishListName ?></td>
-					<td><?= $row->wishListDescription ?></td>
-					<td><?= $row->wishListItem ?></td>
+					<td><?= $row->item_id ?></td>
+					<td><?= $row->user_id ?></td>
+					<td><?= $row->item_name ?></td>
+					<td><?= $row->item_description ?></td>
+					<td><?= $row->item_url ?></td>
 				</tr>
 
 			<?php } ?>
@@ -25,26 +25,26 @@
 	<p id="createmsg"></p>
 
 	<br> <br><br>
-
-	<h3>Register</h3>
-
-	<form>
-
-		<label for='Name'> Name </label>
-		<input type='text' name='name' id='name' size='30'/> <br>
-
-		<label for='Password'> Password </label>
-		<input type='text' name='password' id='password' size='30'/> <br>
-
-		<label for='WishListName'> Name of your Wish List </label>
-		<input type='text' name='wishListName' id='wishListName' size='30'/> <br>
-
-		<label for='WishListDescription'> Description of the Wish List </label>
-		<input type='text' name='wishListDescription' id='wishListDescription'/> <br>
-
-		<input type="submit" value="Create" id="create"/>
-
-	</form>
+<!---->
+<!--	<h3>Register</h3>-->
+<!---->
+<!--	<form>-->
+<!---->
+<!--		<label for='Name'> Name </label>-->
+<!--		<input type='text' name='name' id='name' size='30'/> <br>-->
+<!---->
+<!--		<label for='Password'> Password </label>-->
+<!--		<input type='text' name='password' id='password' size='30'/> <br>-->
+<!---->
+<!--		<label for='WishListName'> Name of your Wish List </label>-->
+<!--		<input type='text' name='wishListName' id='wishListName' size='30'/> <br>-->
+<!---->
+<!--		<label for='WishListDescription'> Description of the Wish List </label>-->
+<!--		<input type='text' name='wishListDescription' id='wishListDescription'/> <br>-->
+<!---->
+<!--		<input type="submit" value="Create" id="create"/>-->
+<!---->
+<!--	</form>-->
 
 	<h3>Create Item</h3>
 
@@ -59,6 +59,9 @@
 		<label for='ItemPrice'> Price of Item </label>
 		<input type='text' name='item_price' id='item_price'/> <br>
 
+		<label for='ItemDescription'> Description </label>
+		<input type='text' name='item_description' id='item_description'/> <br>
+
 		<label for='ItemPriority'> Priority of Item </label>
 		<select name="item_priority">
 			<option value="1">Must Have</option>
@@ -72,36 +75,36 @@
 	</form>
 
 	<br><br>
-	<h3>Delete Item</h3>
-	<form>
-		<label for="edit"> Type in the id to delete/edit</label>
-		<input type="text" name="personID" id="personID" size="10"/> <br>
-
-		<input type="submit" value="Delete" id="delete"/>
-		<input type="submit" value="Edit" id="edit"/>
-	</form>
+<!--	<h3>Delete Item</h3>-->
+<!--	<form>-->
+<!--		<label for="edit"> Type in the id to delete/edit</label>-->
+<!--		<input type="text" name="personID" id="personID" size="10"/> <br>-->
+<!---->
+<!--		<input type="submit" value="Delete" id="delete"/>-->
+<!--		<input type="submit" value="Edit" id="edit"/>-->
+<!--	</form>-->
 
 	<br><br><br>
 
-	<div id="editBox" style="display: none;">
-		<form>
-
-			<input type="hidden" name="personID" id="personID" size="20"/> <br>
-
-			<label for="editname">Edit Name</label>
-			<input type="text" name="editname" id="editname" size="30"/> <br>
-
-			<label for="editname">Edit Address</label>
-			<input type="text" name="editaddress" id="editaddress" size="30"/> <br>
-
-			<label for="editname">Edit Telephone</label>
-			<input type="text" name="edittelephone" id="edittelephone" size="30"/> <br>
-
-			<input type="submit" value="Update" id="update">
-
-		</form>
-
-	</div>
+<!--	<div id="editBox" style="display: none;">-->
+<!--		<form>-->
+<!---->
+<!--			<input type="hidden" name="personID" id="personID" size="20"/> <br>-->
+<!---->
+<!--			<label for="editname">Edit Name</label>-->
+<!--			<input type="text" name="editname" id="editname" size="30"/> <br>-->
+<!---->
+<!--			<label for="editname">Edit Address</label>-->
+<!--			<input type="text" name="editaddress" id="editaddress" size="30"/> <br>-->
+<!---->
+<!--			<label for="editname">Edit Telephone</label>-->
+<!--			<input type="text" name="edittelephone" id="edittelephone" size="30"/> <br>-->
+<!---->
+<!--			<input type="submit" value="Update" id="update">-->
+<!---->
+<!--		</form>-->
+<!---->
+<!--	</div>-->
 
 	<script>
 		$(document).ready(function() {
@@ -111,12 +114,13 @@
 				var title = $("input#item_name").val();
 				var url = $("input#item_url").val();
 				var price = $("input#item_price").val();
+				var description = $("input#item_description").val();
 				var priority = $("input#item_priority").val();
 				$.ajax({
 					method: "POST",
-					url: "<?php echo base_url(); ?>WishListController/add",
+					url: "<?php echo base_url(); ?>ListController/add",
 					dataType: 'JSON',
-					data: {item_name: name, item_url: url, item_price: price, item_priority: priority},
+					data: {item_name: title, item_url: url, item_price: price, item_priority: priority, item_description: description},
 
 					success: function(data) {
 						console.log(name, url, price);
