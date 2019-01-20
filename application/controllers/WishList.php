@@ -6,7 +6,7 @@
  * Date: 1/20/2019
  * Time: 9:37 AM
  */
-class ListController extends CI_Controller
+class WishList extends CI_Controller
 {
 	function __construct()
 	{
@@ -30,7 +30,7 @@ class ListController extends CI_Controller
 			$item_price = $this->input->post("item_price");
 			$item_description = $this->input->post("item_description");
 			$item_priority = $this->input->post("item_priority");
-			$data = $this->ItemModel->addItem($item_name, $item_description, $item_url,$item_price,$item_priority);
+			$data = $this->ItemModel->addItem($item_name, $item_description, $item_url, $item_price, $item_priority);
 			echo json_encode($data);
 		}
 	}

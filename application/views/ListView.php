@@ -1,4 +1,6 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
+include ("header.php");
+?>
 
 <div class="container">
 	<h1>Welcome to Admin!</h1>
@@ -25,26 +27,26 @@
 	<p id="createmsg"></p>
 
 	<br> <br><br>
-<!---->
-<!--	<h3>Register</h3>-->
-<!---->
-<!--	<form>-->
-<!---->
-<!--		<label for='Name'> Name </label>-->
-<!--		<input type='text' name='name' id='name' size='30'/> <br>-->
-<!---->
-<!--		<label for='Password'> Password </label>-->
-<!--		<input type='text' name='password' id='password' size='30'/> <br>-->
-<!---->
-<!--		<label for='WishListName'> Name of your Wish List </label>-->
-<!--		<input type='text' name='wishListName' id='wishListName' size='30'/> <br>-->
-<!---->
-<!--		<label for='WishListDescription'> Description of the Wish List </label>-->
-<!--		<input type='text' name='wishListDescription' id='wishListDescription'/> <br>-->
-<!---->
-<!--		<input type="submit" value="Create" id="create"/>-->
-<!---->
-<!--	</form>-->
+	<!---->
+	<!--	<h3>Register</h3>-->
+	<!---->
+	<!--	<form>-->
+	<!---->
+	<!--		<label for='Name'> Name </label>-->
+	<!--		<input type='text' name='name' id='name' size='30'/> <br>-->
+	<!---->
+	<!--		<label for='Password'> Password </label>-->
+	<!--		<input type='text' name='password' id='password' size='30'/> <br>-->
+	<!---->
+	<!--		<label for='WishListName'> Name of your Wish List </label>-->
+	<!--		<input type='text' name='wishListName' id='wishListName' size='30'/> <br>-->
+	<!---->
+	<!--		<label for='WishListDescription'> Description of the Wish List </label>-->
+	<!--		<input type='text' name='wishListDescription' id='wishListDescription'/> <br>-->
+	<!---->
+	<!--		<input type="submit" value="Create" id="create"/>-->
+	<!---->
+	<!--	</form>-->
 
 	<h3>Create Item</h3>
 
@@ -63,7 +65,7 @@
 		<input type='text' name='item_description' id='item_description'/> <br>
 
 		<label for='ItemPriority'> Priority of Item </label>
-		<select name="item_priority">
+		<select id="item_priority">
 			<option value="1">Must Have</option>
 			<option value="2">Would be Nice to Have</option>
 			<option value="3">If You Can</option>
@@ -75,54 +77,57 @@
 	</form>
 
 	<br><br>
-<!--	<h3>Delete Item</h3>-->
-<!--	<form>-->
-<!--		<label for="edit"> Type in the id to delete/edit</label>-->
-<!--		<input type="text" name="personID" id="personID" size="10"/> <br>-->
-<!---->
-<!--		<input type="submit" value="Delete" id="delete"/>-->
-<!--		<input type="submit" value="Edit" id="edit"/>-->
-<!--	</form>-->
+	<!--	<h3>Delete Item</h3>-->
+	<!--	<form>-->
+	<!--		<label for="edit"> Type in the id to delete/edit</label>-->
+	<!--		<input type="text" name="personID" id="personID" size="10"/> <br>-->
+	<!---->
+	<!--		<input type="submit" value="Delete" id="delete"/>-->
+	<!--		<input type="submit" value="Edit" id="edit"/>-->
+	<!--	</form>-->
 
-	<br><br><br>
 
-<!--	<div id="editBox" style="display: none;">-->
-<!--		<form>-->
-<!---->
-<!--			<input type="hidden" name="personID" id="personID" size="20"/> <br>-->
-<!---->
-<!--			<label for="editname">Edit Name</label>-->
-<!--			<input type="text" name="editname" id="editname" size="30"/> <br>-->
-<!---->
-<!--			<label for="editname">Edit Address</label>-->
-<!--			<input type="text" name="editaddress" id="editaddress" size="30"/> <br>-->
-<!---->
-<!--			<label for="editname">Edit Telephone</label>-->
-<!--			<input type="text" name="edittelephone" id="edittelephone" size="30"/> <br>-->
-<!---->
-<!--			<input type="submit" value="Update" id="update">-->
-<!---->
-<!--		</form>-->
-<!---->
-<!--	</div>-->
-
+	<!--	<div id="editBox" style="display: none;">-->
+	<!--		<form>-->
+	<!---->
+	<!--			<input type="hidden" name="personID" id="personID" size="20"/> <br>-->
+	<!---->
+	<!--			<label for="editname">Edit Name</label>-->
+	<!--			<input type="text" name="editname" id="editname" size="30"/> <br>-->
+	<!---->
+	<!--			<label for="editname">Edit Address</label>-->
+	<!--			<input type="text" name="editaddress" id="editaddress" size="30"/> <br>-->
+	<!---->
+	<!--			<label for="editname">Edit Telephone</label>-->
+	<!--			<input type="text" name="edittelephone" id="edittelephone" size="30"/> <br>-->
+	<!---->
+	<!--			<input type="submit" value="Update" id="update">-->
+	<!---->
+	<!--		</form>-->
+	<!---->
+	<!--	</div>-->
 	<script>
-		$(document).ready(function() {
-
-			$("#add_item").click(function(event) {
+		$(document).ready(function () {
+			$("#add_item").click(function (event) {
 				event.preventDefault();
 				var title = $("input#item_name").val();
 				var url = $("input#item_url").val();
 				var price = $("input#item_price").val();
 				var description = $("input#item_description").val();
-				var priority = $("input#item_priority").val();
+				var priority = $("select#item_priority").val();
 				$.ajax({
 					method: "POST",
-					url: "<?php echo base_url(); ?>ListController/add",
+					url: "<?php echo base_url(); ?>WishList/add",
 					dataType: 'JSON',
-					data: {item_name: title, item_url: url, item_price: price, item_priority: priority, item_description: description},
+					data: {
+						item_name: title,
+						item_url: url,
+						item_price: price,
+						item_priority: priority,
+						item_description: description
+					},
 
-					success: function(data) {
+					success: function (data) {
 						console.log(name, url, price);
 						$("#data").load(location.href + " #data");
 						$("#message").html("You have successfully added an item to your list");
@@ -137,6 +142,6 @@
 		});
 
 	</script>
-
 </div>
+
 

@@ -6,7 +6,7 @@
  * Time: 9:36 PM
  */
 
-class LoginController extends CI_Controller
+class Login extends CI_Controller
 {
 public function Login(){
 
