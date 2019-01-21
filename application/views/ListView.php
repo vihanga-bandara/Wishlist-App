@@ -77,35 +77,47 @@ include ("header.php");
 	</form>
 
 	<br><br>
-	<!--	<h3>Delete Item</h3>-->
-	<!--	<form>-->
-	<!--		<label for="edit"> Type in the id to delete/edit</label>-->
-	<!--		<input type="text" name="personID" id="personID" size="10"/> <br>-->
-	<!---->
-	<!--		<input type="submit" value="Delete" id="delete"/>-->
-	<!--		<input type="submit" value="Edit" id="edit"/>-->
-	<!--	</form>-->
+		<h3>Delete Item</h3>
+		<form>
+			<label for="edit"> Type in the id to delete/edit</label>
+			<input type="text" name="item_id" id="item_id"/> <br>
+
+			<input type="submit" value="Delete" id="delete"/>
+			<input type="submit" value="Edit" id="edit"/>
+		</form>
 
 
-	<!--	<div id="editBox" style="display: none;">-->
-	<!--		<form>-->
-	<!---->
-	<!--			<input type="hidden" name="personID" id="personID" size="20"/> <br>-->
-	<!---->
-	<!--			<label for="editname">Edit Name</label>-->
-	<!--			<input type="text" name="editname" id="editname" size="30"/> <br>-->
-	<!---->
-	<!--			<label for="editname">Edit Address</label>-->
-	<!--			<input type="text" name="editaddress" id="editaddress" size="30"/> <br>-->
-	<!---->
-	<!--			<label for="editname">Edit Telephone</label>-->
-	<!--			<input type="text" name="edittelephone" id="edittelephone" size="30"/> <br>-->
-	<!---->
-	<!--			<input type="submit" value="Update" id="update">-->
-	<!---->
-	<!--		</form>-->
-	<!---->
-	<!--	</div>-->
+		<div id="editBox" style="display: none;">
+			<form>
+
+				<input type="hidden" name="hidden_item_id" id="item_id"/> <br>
+
+				<label for="editname">Edit Name</label>
+				<input type="text" name="edit_name" id="edit_name"/> <br>
+
+				<label for="editname">Edit Address</label>
+				<input type="text" name="edit_url" id="edit_url"/> <br>
+
+				<label for="editname">Edit Address</label>
+				<input type="text" name="edit_price" id="edit_price"/> <br>
+
+				<label for="editname">Edit Telephone</label>
+				<input type="text" name="edit_description" id="edit_description"/> <br>
+
+				<label for="editname">Edit Telephone</label>
+				<input type="text" name="edit_description" id="edit_description"/> <br>
+
+				<label for='ItemPriority'> Priority of Item </label>
+				<select id="item_priority">
+					<option value="1">Must Have</option>
+					<option value="2">Would be Nice to Have</option>
+					<option value="3">If You Can</option>
+				</select>
+
+				<input type="submit" value="Update" id="update">
+
+			</form>
+		</div>
 	<script>
 		$(document).ready(function () {
 			$("#add_item").click(function (event) {
