@@ -21,15 +21,25 @@ class Login extends REST_Controller
 
 	/**
 	 * Register a new user
+	 * -------------------------
+	 * @param: name
+	 * @param: email
+	 * @param: password
+	 * @param: list_name
+	 * @param: list_description
+	 * -------------------------
 	 * @method : POST
+	 * @url : api/user/register
 	 */
-	public function add_user_post()
+	public function register_user_post()
 	{
+		# XSS Filtering (Security)
+		$data = $this->security->xss_clean($_POST);
 
 	}
 
-	public function Logout()
-	{
-
-	}
+//	public function Logout()
+//	{
+//
+//	}
 }
