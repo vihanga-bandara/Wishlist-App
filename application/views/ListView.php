@@ -95,16 +95,16 @@ include ("header.php");
 				<label for="editname">Edit Name</label>
 				<input type="text" name="edit_name" id="edit_name"/> <br>
 
-				<label for="editname">Edit Address</label>
+				<label for="editaddress">Edit URL</label>
 				<input type="text" name="edit_url" id="edit_url"/> <br>
 
-				<label for="editname">Edit Address</label>
+				<label for="editprice">Edit Price</label>
 				<input type="text" name="edit_price" id="edit_price"/> <br>
 
-				<label for="editname">Edit Telephone</label>
+				<label for="editdescription">Edit Description</label>
 				<input type="text" name="edit_description" id="edit_description"/> <br>
 
-				<label for="editname">Edit Telephone</label>
+				<label for="edittelephone">Edit Telephone</label>
 				<input type="text" name="edit_description" id="edit_description"/> <br>
 
 				<label for='ItemPriority'> Priority of Item </label>
@@ -118,6 +118,7 @@ include ("header.php");
 
 			</form>
 		</div>
+
 	<script>
 		$(document).ready(function () {
 			$("#add_item").click(function (event) {
