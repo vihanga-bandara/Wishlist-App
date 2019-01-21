@@ -1,16 +1,23 @@
+// colours //
+$colourNew: #1abc9c;
+$colourRst: #e74c3c;
+$colourRtn: #9b59b6;
+$black: #000;
+$white: #fff;
+
 .wrap {
-  background-color: #1abc9c;
+  background-color: $colourNew;
   height: 100vh;
   transition: background-color 400ms ease;
-}
-.wrap.--rtn {
-  background-color: #9b59b6;
-}
-.wrap.--new {
-  background-color: #1abc9c;
-}
-.wrap.--rst {
-  background-color: #e74c3c;
+  &.--rtn {
+    background-color: $colourRtn;
+  }
+  &.--new {
+    background-color: $colourNew;
+  }
+  &.--rst {
+    background-color: $colourRst;
+  }
 }
 
 .flex-form {
@@ -30,15 +37,15 @@
 }
 
 .select__label {
-  color: #fff;
+  color: $white;
   cursor: pointer;
   font-weight: 500;
   opacity: 0.6;
   padding: 0 2rem;
   text-transform: capitalize;
-}
-.select__label--active {
-  opacity: 1;
+  &--active {
+    opacity: 1;
+  }
 }
 
 .ui-button,
@@ -49,53 +56,58 @@
   width: 25rem;
 }
 
-.ui-elem-pass.--rst {
-  height: 0;
-  margin: 0;
+.ui-elem-pass {
+  &.--rst {
+    height: 0;
+    margin: 0;
+  }
 }
 
-.ui-elem-rpass.--rtn, .ui-elem-rpass.--rst {
-  height: 0;
-  margin: 0;
+.ui-elem-rpass {
+  &.--rtn,
+  &.--rst {
+    height: 0;
+    margin: 0;
+  }
 }
 
 input {
-  background-color: #fff;
+  background-color: $white;
   margin: .5rem 0;
   text-align: center;
 }
 
 textarea:focus,
 input:focus {
-  outline-color: #fff;
+  outline-color: $white;
 }
 
 .pointer {
   border-left: 1rem solid transparent;
   border-right: 1rem solid transparent;
-  border-bottom: 1rem solid #fff;
+  border-bottom: 1rem solid $white;
   height: 0;
   position: relative;
   top: .6rem;
   transition: all 30s ease;
   width: 0;
-}
-.pointer.--new {
-  right: 9rem;
-}
-.pointer.--rst {
-  left: 9.5rem;
+  &.--new {
+    right: 9rem;
+  }
+  &.--rst {
+    left: 9.5rem;
+  }
 }
 
 .ui-button {
-  background: rgba(255, 255, 255, 0.2);
-  color: #fff;
+  background: rgba($white, 0.2);
+  color: $white;
   cursor: pointer;
   font-weight: 500;
   margin: .5rem 0;
   text-transform: capitalize;
   transition: background 300ms;
-}
-.ui-button:hover {
-  background: rgba(0, 0, 0, 0.1);
+  &:hover {
+    background: rgba($black, 0.1);
+  }
 }

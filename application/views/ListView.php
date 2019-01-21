@@ -3,7 +3,7 @@ include ("header.php");
 ?>
 
 <div class="container">
-	<h1>Welcome to Admin!</h1>
+	<h1>Welcome to your Wish List!</h1>
 
 	<div id="data">
 		<table>

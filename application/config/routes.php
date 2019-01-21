@@ -52,3 +52,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'WishList';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+
+$route['API'] = 'Rest_server';
+
+// Item API Routes
+$route['api/item/add'] = 'api/WishList/add_item';
+$route['api/items/all'] = 'api/WishList/fetch_all_items';
+
+//User API Routes
+$route['api/user/register'] = 'api/WishList/add_item';
+$route['api/items/all'] = 'api/WishList/fetch_all_items';
+
+

@@ -25,38 +25,17 @@ class ItemModel extends CI_Model
 		}
 	}
 
-	public function getAllItems()
+	public function getAllItems($user_id)
 	{
 		$this->db->select("*");
 		$this->db->from("item_tbl");
 		$this->db->where('user_id', "1");
 		$query = $this->db->get();
 		return $query->result();
-
-		$num_data_returned = $query->num_rows;
-
-		if ($num_data_returned < 1)
-		{
-			echo "There is no data in the database";
-			exit();
-		}
 	}
 
 	public function addItem($item_name, $item_description, $item_url,$item_price,$item_priority)
 	{
-		#convert to json
-//		$this->db->select("wishListItem");
-//		$this->db->from("wishlist");
-//		$this->db->where('userId', "1");
-//		$item = $this->db->get()->row();
-//		$jsonData = json_decode($item);
-//		$new_poi = new stdClass();
-//		$new_poi->title = $item_name;
-//		$new_poi->url = $url;
-//		$new_poi->price = $price;
-//		$new_poi->priority = $priority;
-
-		#update db
 		$this->db->set('user_id', "1");
 		$this->db->set('item_name', $item_name);
 		$this->db->set('item_description', $item_description);
