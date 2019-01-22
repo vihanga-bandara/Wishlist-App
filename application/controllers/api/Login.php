@@ -41,11 +41,15 @@ class Login extends REST_Controller
 		$this->load->library('form_validation');
 
 		//Validation
-		$this->form_validation->set_rules('name', 'Name of User', 'trim|required');
-		$this->form_validation->set_rules('email', 'Email', 'trim|required');
-		$this->form_validation->set_rules('password', 'Password', 'trim|required');
-		$this->form_validation->set_rules('listName', 'List Name', 'trim|required');
-		$this->form_validation->set_rules('listDescription', 'List Description', 'trim|required');
+		$this->form_validation->set_rules('name', 'Name of User', 'trim|required|is_unique[users_tbl.user_name]|alpha_numeric|max_length[20]',
+			array('is_unique' => 'Username already exists. Please Enter a different Username')
+		);
+		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[users_tbl.user_email]|max_length[80]',
+			array('is_unique' => 'Email already exists, Please Enter a different Email')
+		);
+		$this->form_validation->set_rules('password', 'Password', 'trim|required|max_length[80]');
+		$this->form_validation->set_rules('listName', 'List Name', 'trim|required|max_length[80]');
+		$this->form_validation->set_rules('listDescription', 'List Description', 'trim|required|max_length[150]');
 
 		if ($this->form_validation->run() == FALSE)
 		{
@@ -58,14 +62,29 @@ class Login extends REST_Controller
 		} else
 		{
 			$register_data = array(
-				"name" => $this->input->post("name", TRUE),
-				"email" => $this->input->post("email", TRUE),
-				"password" => hash("sha256", $this->input->post("password", TRUE)),
-				"listName" => $this->input->post("listName", TRUE),
-				"listDescription" => $this->input->post("listDescription", TRUE),
+				"user_name" => $this->input->post("name", TRUE),
+				"user_email" => $this->input->post("email", TRUE),
+				"user_password" => hash("sha256", $this->input->post("password", TRUE)),
+				"user_list_name" => $this->input->post("listName", TRUE),
+				"user_list_desc" => $this->input->post("listDescription", TRUE),
 			);
 			$data = $this->UserModel->registerUser($register_data);
-			var_dump($data);
+			if (!empty($data) && ($data > 0))
+			{
+				$message = array(
+					"status" => true,
+					"message" => "Successfully register user"
+				);
+				$this->response($message, REST_Controller::HTTP_CREATED);
+			} else
+			{
+				$message = array(
+					"status" => true,
+					"error" => $this->form_validation->error_array(),
+					"message" => "Unable to complete registration, try again later"
+				);
+				$this->response($message, REST_Controller::HTTP_NOT_FOUND);
+			}
 		}
 
 	}
