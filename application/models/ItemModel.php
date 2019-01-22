@@ -52,6 +52,6 @@ class ItemModel extends CI_Model
 	{
 		$this->db->where("item_id", $item_id);
 		$this->db->delete($this->item_tbl_name);
-		return ($this->db->affected_rows() >= 1) ? "Deleted Successfully" : "Item Not Found";
+		return ($this->db->affected_rows() >= 1) ? "Deleted Successfully" : false;
 	}
 }

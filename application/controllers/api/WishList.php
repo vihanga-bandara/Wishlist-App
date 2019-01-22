@@ -30,7 +30,7 @@ class WishList extends REST_Controller
 	 * @method : POST
 	 * @url : api/list/item
 	 */
-	public function add_item_post()
+	public function addItem_post()
 	{
 		if ($this->input->server("REQUEST_METHOD") == "POST")
 		{
@@ -93,7 +93,7 @@ class WishList extends REST_Controller
 	 * @method : GET
 	 * @url : api/list/item/{item_id}
 	 */
-	public function fetch_item_get()
+	public function fetchItem_get()
 	{
 		if ($this->input->server("REQUEST_METHOD") == "GET")
 		{
@@ -137,7 +137,7 @@ class WishList extends REST_Controller
 	 * @method : GET
 	 * @url : api/list/item
 	 */
-	public function fetch_all_items_get()
+	public function fetchAllItems_get()
 	{
 		if ($this->input->server("REQUEST_METHOD") == "GET")
 		{
@@ -159,7 +159,7 @@ class WishList extends REST_Controller
 	 * @method : PUT
 	 * @url : api/list/item/{item_id}
 	 */
-	public function update_item_put()
+	public function updateItem_put()
 	{
 		if ($this->input->server("REQUEST_METHOD") == "PUT")
 		{
@@ -205,13 +205,31 @@ class WishList extends REST_Controller
 	 * @method : DELETE
 	 * @url : api/list/item/{item_id}
 	 */
-	public function item_delete()
+	public function deleteItem_delete()
 	{
-		if ($this->input->server("REQUEST_METHOD") == "POST")
+		if ($this->input->server("REQUEST_METHOD") == "DELETE")
 		{
-			$item_id = $this->delete("item_id");
-			$data = $this->ItemModel->deleteItem($item_id);
-			echo json_encode($data);
+			$last = $this->uri->total_segments();
+			$item_id = $this->uri->segment($last);
+
+			$response = $this->ItemModel->deleteItem($item_id);
+			if (!empty($response) AND $response != false)
+			{
+				$message = array(
+					"status" => true,
+					"data" => $item_id,
+					"message" => "Item successfully deleted"
+				);
+				$this->response($message, REST_Controller::HTTP_OK);
+			} else
+			{
+				$message = array(
+					"status" => false,
+					"error" => $this->form_validation->error_array(),
+					"message" => "Error when deleting item"
+				);
+				$this->response($message, REST_Controller::HTTP_BAD_REQUEST);
+			}
 		}
 	}
 

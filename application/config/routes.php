@@ -61,20 +61,20 @@ switch ($_SERVER['REQUEST_METHOD'])
 {
 	case 'GET':
 		// fetch single item
-		$route['api/list/item/(:num)'] = 'api/wishlist/fetch_item';
+		$route['api/list/item/(:num)'] = 'api/wishlist/fetchItem';
 		// fetch all items
-		$route['api/list/item'] = 'api/wishlist/fetch_all_items';
+		$route['api/list/item'] = 'api/wishlist/fetchAllItems';
 		break;
 	case 'POST':
 		// add single item
-		$route['api/list/item'] = 'api/wishlist/add_item';
+		$route['api/list/item'] = 'api/wishlist/addItem';
 		break;
 	case 'PUT':
 		//update a single item
-		$route['api/list/item/(:num)'] = 'api/wishlist/update_item';
+		$route['api/list/item/(:num)'] = 'api/wishlist/updateItem';
 	case 'DELETE':
-		//upssdasda
-//		$route['api/list/item/(:num)'] = 'api/wishlist/update_item';
+		//delete a single item
+		$route['api/list/item/(:num)'] = 'api/wishlist/deleteItem';
 
 }
 
