@@ -38,7 +38,6 @@ class User extends REST_Controller
 
 		# XSS Filtering (Security)
 		$data = $this->security->xss_clean($_POST);
-		$this->load->library('form_validation');
 
 		//Validation
 		$this->form_validation->set_rules('name', 'Name of User', 'trim|required|is_unique[users_tbl.user_name]|alpha_numeric|max_length[20]',
@@ -66,7 +65,7 @@ class User extends REST_Controller
 				"user_email" => $this->input->post("email", TRUE),
 				"user_password" => hash("sha256", $this->input->post("password", TRUE)),
 				"user_list_name" => $this->input->post("listName", TRUE),
-				"user_list_desc" => $this->input->post("listDescription", TRUE),
+				"user_list_description" => $this->input->post("listDescription", TRUE),
 			);
 			$data = $this->UserModel->registerUser($register_data);
 			if (!empty($data) && ($data > 0))
@@ -131,7 +130,7 @@ class User extends REST_Controller
 					"user_name" => $login_data->user_name,
 					"user_email" => $login_data->user_email,
 					"user_list_name" => $login_data->user_list_name,
-					"user_list_desc" => $login_data->user_list_desc
+					"user_list_description" => $login_data->user_list_description
 				);
 				$message = array(
 					"status" => true,

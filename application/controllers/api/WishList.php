@@ -8,6 +8,7 @@
  */
 
 use Restserver\Libraries\REST_Controller;
+
 require APPPATH . '/libraries/REST_Controller.php';
 
 
@@ -33,30 +34,50 @@ class WishList extends REST_Controller
 	{
 		if ($this->input->server("REQUEST_METHOD") == "POST")
 		{
-			$postData = array(
-				"item_name" => $this->input->post("item_name", TRUE),
-				"item_url" => $this->input->post("item_url", TRUE),
-				"item_price" => $this->input->post("item_price", TRUE),
-				"item_desc" => $this->input->post("item_description", TRUE),
-				"item_priority" => $this->input->post("item_priority", TRUE),
-			);
+			//Validation
+			$this->form_validation->set_rules('item_id', 'Item id', 'trim|required');
+			$this->form_validation->set_rules('item_name', 'Item name', 'trim|required');
+			$this->form_validation->set_rules('item_url', 'Item URL', 'trim|required');
+			$this->form_validation->set_rules('item_price', 'Item price', 'trim|required');
+			$this->form_validation->set_rules('item_description', 'Item description', 'trim|required');
+			$this->form_validation->set_rules('item_priority', 'Item priority', 'trim|required');
 
-			$data = $this->ItemModel->addItem($postData);
-			if (!empty($data) && ($data > 0))
-			{
-				$message = array(
-					"status" => true,
-					"message" => "Successfully added an item"
-				);
-				$this->response($message, REST_Controller::HTTP_CREATED);
-			} else
+			if ($this->form_validation->run() == FALSE)
 			{
 				$message = array(
 					"status" => false,
 					"error" => $this->form_validation->error_array(),
-					"message" => "Unable to add an item"
+					"message" => $this->validation_errors()
 				);
 				$this->response($message, REST_Controller::HTTP_NOT_FOUND);
+			} else
+			{
+				$postData = array(
+					"item_id" => $this->input->post("item_id", TRUE),
+					"item_name" => $this->input->post("item_name", TRUE),
+					"item_url" => $this->input->post("item_url", TRUE),
+					"item_price" => $this->input->post("item_price", TRUE),
+					"item_description" => $this->input->post("item_description", TRUE),
+					"item_priority" => $this->input->post("item_priority", TRUE),
+				);
+
+				$data = $this->ItemModel->addItem($postData);
+				if (!empty($data) && ($data > 0))
+				{
+					$message = array(
+						"status" => true,
+						"message" => "Successfully added an item"
+					);
+					$this->response($message, REST_Controller::HTTP_CREATED);
+				} else
+				{
+					$message = array(
+						"status" => false,
+						"error" => $this->form_validation->error_array(),
+						"message" => "Unable to add an item"
+					);
+					$this->response($message, REST_Controller::HTTP_NOT_FOUND);
+				}
 			}
 		}
 	}
@@ -87,7 +108,7 @@ class WishList extends REST_Controller
 	 * Fetch all existing items
 	 * -------------------------
 	 * @method : GET
-	 * @url : api/item/add
+	 * @url : api/list/item
 	 */
 	public function fetch_all_items_get()
 	{
@@ -97,6 +118,7 @@ class WishList extends REST_Controller
 			$this->response($data);
 		}
 	}
+
 	/**
 	 * Update existing item
 	 * -------------------------

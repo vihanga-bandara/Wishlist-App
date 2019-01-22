@@ -18,11 +18,10 @@ class ItemModel extends CI_Model
 		return $query->result();
 	}
 
-	public function getAllItems($user_id)
+	public function getAllItems()
 	{
 		$this->db->select("*");
 		$this->db->from("item_tbl");
-		$this->db->where('user_id', "1");
 		$query = $this->db->get();
 		return $query->result();
 	}
@@ -30,7 +29,8 @@ class ItemModel extends CI_Model
 	public function addItem($postData)
 	{
 		$this->db->insert('item_tbl',$postData);
-		return $this->db->insert_id();
+//		return $this->db->insert_id();
+		return $postData;
 	}
 
 	public function updateItem($item_name, $item_description, $item_url, $item_price, $item_priority, $item_id)
