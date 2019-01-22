@@ -57,15 +57,15 @@ class User extends REST_Controller
 				"error" => $this->form_validation->error_array(),
 				"message" => $this->validation_errors()
 			);
-			$this->response($message, REST_Controller::HTTP_NOT_FOUND);
+			$this->response($message, REST_Controller::HTTP_BAD_REQUEST);
 		} else
 		{
 			$register_data = array(
-				"user_name" => $this->input->post("name", TRUE),
-				"user_email" => $this->input->post("email", TRUE),
+				"user_name" => $this->post("name", TRUE),
+				"user_email" => $this->post("email", TRUE),
 				"user_password" => hash("sha256", $this->input->post("password", TRUE)),
-				"user_list_name" => $this->input->post("listName", TRUE),
-				"user_list_description" => $this->input->post("listDescription", TRUE),
+				"user_list_name" => $this->post("listName", TRUE),
+				"user_list_description" => $this->post("listDescription", TRUE),
 			);
 			$data = $this->UserModel->registerUser($register_data);
 			if (!empty($data) && ($data > 0))
@@ -116,11 +116,11 @@ class User extends REST_Controller
 				"error" => $this->form_validation->error_array(),
 				"message" => $this->validation_errors()
 			);
-			$this->response($message, REST_Controller::HTTP_NOT_FOUND);
+			$this->response($message, REST_Controller::HTTP_BAD_REQUEST);
 		} else
 		{
-			$user_name = $this->input->post("name", TRUE);
-			$user_password = $this->input->post("password", TRUE);
+			$user_name = $this->post("name", TRUE);
+			$user_password = $this->post("password", TRUE);
 
 			$login_data = $this->UserModel->loginUser($user_name, $user_password);
 			if (!empty($login_data) AND $login_data != false)

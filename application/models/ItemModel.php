@@ -8,47 +8,50 @@
  */
 class ItemModel extends CI_Model
 {
+	private $item_tbl_name = "item_tbl";
 
-	public function getItem($item_id)
+	public function getSingleItem($item_id)
 	{
 		$this->db->select("*");
-		$this->db->from("item_tbl");
+		$this->db->from($this->item_tbl_name);
 		$this->db->where("item_id", $item_id);
 		$query = $this->db->get();
-		return $query->result();
+		return $query->row();
 	}
 
 	public function getAllItems()
 	{
 		$this->db->select("*");
-		$this->db->from("item_tbl");
+		$this->db->from($this->item_tbl_name);
 		$query = $this->db->get();
 		return $query->result();
 	}
 
 	public function addItem($postData)
 	{
-		$this->db->insert('item_tbl',$postData);
+		$this->db->insert($this->item_tbl_name, $postData);
 //		return $this->db->insert_id();
 		return $postData;
 	}
 
-	public function updateItem($item_name, $item_description, $item_url, $item_price, $item_priority, $item_id)
+	public function updateItem($item_name, $item_url, $item_price, $item_description, $item_priority, $item_id)
 	{
-		$this->db->set('item_name', $item_name);
-		$this->db->set('item_description', $item_description);
-		$this->db->set('item_price', $item_price);
-		$this->db->set('item_url', $item_url);
-		$this->db->set('item_priority', $item_priority);
+		$updateData = array(
+			"item_name" => $item_name,
+			"item_url" => $item_url,
+			"item_price" => $item_price,
+			"item_description" => $item_description,
+			"item_priority" => $item_priority
+		);
 		$this->db->where("item_id", $item_id);
-		$this->db->update('item_tbl');
-		return ($this->db->affected_rows() >= 1) ? "Updating Item was successful" : "Error Updating Item";
+		$this->db->update($this->item_tbl_name, $updateData);
+		return ($this->db->affected_rows() >= 1) ? "Updating Item was successful" : false;
 	}
 
 	public function deleteItem($item_id)
 	{
 		$this->db->where("item_id", $item_id);
-		$this->db->delete("item_tbl");
+		$this->db->delete($this->item_tbl_name);
 		return ($this->db->affected_rows() >= 1) ? "Deleted Successfully" : "Item Not Found";
 	}
 }

@@ -25,16 +25,18 @@ class UserModel extends CI_Model
 		$this->db->where("user_name", $user_name);
 		$this->db->or_where("user_email", $user_name);
 		$result = $this->db->get();
-		if($result->num_rows())
+		if ($result->num_rows())
 		{
 			$password = $result->row('user_password');
-			if((hash("sha256", $user_password)) === ($password)){
+			if ((hash("sha256", $user_password)) === ($password))
+			{
 				return $result->row();
-			} else {
-				//a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3
+			} else
+			{
 				return false;
 			}
-		} else {
+		} else
+		{
 			return false;
 		}
 	}
