@@ -120,27 +120,24 @@ class Login extends REST_Controller
 			$this->response($message, REST_Controller::HTTP_NOT_FOUND);
 		} else
 		{
-			$register_data = array(
+			$login_data = array(
 				"user_name" => $this->input->post("name", TRUE),
-				"user_email" => $this->input->post("email", TRUE),
-				"user_password" => hash("sha256", $this->input->post("password", TRUE)),
-				"user_list_name" => $this->input->post("listName", TRUE),
-				"user_list_desc" => $this->input->post("listDescription", TRUE),
+				"user_password" => $this->input->post("email", TRUE),
 			);
-			$data = $this->UserModel->registerUser($register_data);
+			$data = $this->UserModel->loginUser($login_data);
 			if (!empty($data) && ($data > 0))
 			{
 				$message = array(
 					"status" => true,
-					"message" => "Successfully register user"
+					"message" => "Successfully Logged in user"
 				);
-				$this->response($message, REST_Controller::HTTP_CREATED);
+				$this->response($message, REST_Controller::HTTP_OK);
 			} else
 			{
 				$message = array(
 					"status" => true,
 					"error" => $this->form_validation->error_array(),
-					"message" => "Unable to complete registration, try again later"
+					"message" => "Error when logging in, try again later"
 				);
 				$this->response($message, REST_Controller::HTTP_NOT_FOUND);
 			}
