@@ -11,7 +11,7 @@ use Restserver\Libraries\REST_Controller;
 require APPPATH . '/libraries/REST_Controller.php';
 
 
-class Login extends REST_Controller
+class User extends REST_Controller
 {
 	function __construct()
 	{
@@ -79,7 +79,7 @@ class Login extends REST_Controller
 			} else
 			{
 				$message = array(
-					"status" => true,
+					"status" => false,
 					"error" => $this->form_validation->error_array(),
 					"message" => "Unable to complete registration, try again later"
 				);
@@ -120,22 +120,30 @@ class Login extends REST_Controller
 			$this->response($message, REST_Controller::HTTP_NOT_FOUND);
 		} else
 		{
-			$login_data = array(
-				"user_name" => $this->input->post("name", TRUE),
-				"user_password" => $this->input->post("email", TRUE),
-			);
-			$data = $this->UserModel->loginUser($login_data);
-			if (!empty($data) && ($data > 0))
+			$user_name = $this->input->post("name", TRUE);
+			$user_password = $this->input->post("password", TRUE);
+
+			$login_data = $this->UserModel->loginUser($user_name, $user_password);
+			if (!empty($login_data) AND $login_data != false)
 			{
+				$login_data = array(
+					"user_id" => $login_data->user_id,
+					"user_name" => $login_data->user_name,
+					"user_email" => $login_data->user_email,
+					"user_list_name" => $login_data->user_list_name,
+					"user_list_desc" => $login_data->user_list_desc
+				);
 				$message = array(
 					"status" => true,
-					"message" => "Successfully Logged in user"
+					"data" => $login_data,
+					"message" => "User successfully logged in"
 				);
 				$this->response($message, REST_Controller::HTTP_OK);
 			} else
 			{
+				//Login Error
 				$message = array(
-					"status" => true,
+					"status" => false,
 					"error" => $this->form_validation->error_array(),
 					"message" => "Error when logging in, try again later"
 				);

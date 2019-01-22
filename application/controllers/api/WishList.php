@@ -44,13 +44,13 @@ class WishList extends REST_Controller
 	 */
 	public function fetch_item_get()
 	{
-//		if ($this->input->server("REQUEST_METHOD") == "GET")
-//		{
-//			$item_id = $this->input->get("item_id");
-//			$data = $this->ItemModel->getItem($item_id);
-//			header("Content-Type: application/json");
-//			echo json_encode($data);
-//		}
+		if ($this->input->server("REQUEST_METHOD") == "GET")
+		{
+			$item_id = $this->input->get("item_id");
+			$data = $this->ItemModel->getItem($item_id);
+			header("Content-Type: application/json");
+			echo json_encode($data);
+		}
 
 		$data = array('returned');
 		$this->response($data);
