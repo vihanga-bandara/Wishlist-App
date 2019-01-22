@@ -79,7 +79,7 @@ switch ($_SERVER['REQUEST_METHOD'])
 }
 
 //User API Routes
-$route['api/user/register'] = 'api/user/register_user';
-$route['api/user/login'] = 'api/user/login_user';
+$route['api/user/register'] = 'api/user/registerUser';
+$route['api/user/login'] = 'api/user/loginUser';
 
 
