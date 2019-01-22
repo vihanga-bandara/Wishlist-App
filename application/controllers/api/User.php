@@ -32,7 +32,7 @@ class User extends REST_Controller
 	 * @method : POST
 	 * @url : api/user/register
 	 */
-	public function registerUser_post()
+	public function register_user_post()
 	{
 		header("Access-Control-Allow-Origin: *");
 
@@ -97,7 +97,7 @@ class User extends REST_Controller
 	 * @method : POST
 	 * @url : api/user/login
 	 */
-	public function loginUser_post()
+	public function login_user_post()
 	{
 		header("Access-Control-Allow-Origin: *");
 

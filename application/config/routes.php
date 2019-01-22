@@ -61,25 +61,25 @@ switch ($_SERVER['REQUEST_METHOD'])
 {
 	case 'GET':
 		// fetch single item
-		$route['api/list/item/(:num)'] = 'api/wishlist/fetchItem';
+		$route['api/list/item/(:num)'] = 'api/wishlist/fetch_item';
 		// fetch all items
-		$route['api/list/item'] = 'api/wishlist/fetchAllItems';
+		$route['api/list/item'] = 'api/wishlist/fetch_all_items';
 		break;
 	case 'POST':
 		// add single item
-		$route['api/list/item'] = 'api/wishlist/addItem';
+		$route['api/list/item'] = 'api/wishlist/add_item';
 		break;
 	case 'PUT':
 		//update a single item
-		$route['api/list/item/(:num)'] = 'api/wishlist/updateItem';
+		$route['api/list/item/(:num)'] = 'api/wishlist/update_item';
 	case 'DELETE':
 		//delete a single item
-		$route['api/list/item/(:num)'] = 'api/wishlist/deleteItem';
+		$route['api/list/item/(:num)'] = 'api/wishlist/item';
 
 }
 
 //User API Routes
-$route['api/user/register'] = 'api/user/registerUser';
-$route['api/user/login'] = 'api/user/loginUser';
+$route['api/user/register'] = 'api/user/register_user';
+$route['api/user/login'] = 'api/user/login_user';
 
 

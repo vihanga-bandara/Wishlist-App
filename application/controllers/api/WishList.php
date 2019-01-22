@@ -30,7 +30,7 @@ class WishList extends REST_Controller
 	 * @method : POST
 	 * @url : api/list/item
 	 */
-	public function addItem_post()
+	public function add_item_post()
 	{
 		if ($this->input->server("REQUEST_METHOD") == "POST")
 		{
@@ -93,7 +93,7 @@ class WishList extends REST_Controller
 	 * @method : GET
 	 * @url : api/list/item/{item_id}
 	 */
-	public function fetchItem_get()
+	public function fetch_item_get()
 	{
 		if ($this->input->server("REQUEST_METHOD") == "GET")
 		{
@@ -137,7 +137,7 @@ class WishList extends REST_Controller
 	 * @method : GET
 	 * @url : api/list/item
 	 */
-	public function fetchAllItems_get()
+	public function fetch_all_items_get()
 	{
 		if ($this->input->server("REQUEST_METHOD") == "GET")
 		{
@@ -159,7 +159,7 @@ class WishList extends REST_Controller
 	 * @method : PUT
 	 * @url : api/list/item/{item_id}
 	 */
-	public function updateItem_put()
+	public function update_item_put()
 	{
 		if ($this->input->server("REQUEST_METHOD") == "PUT")
 		{
@@ -205,13 +205,12 @@ class WishList extends REST_Controller
 	 * @method : DELETE
 	 * @url : api/list/item/{item_id}
 	 */
-	public function deleteItem_delete()
+	public function item_delete()
 	{
 		if ($this->input->server("REQUEST_METHOD") == "DELETE")
 		{
 			$last = $this->uri->total_segments();
 			$item_id = $this->uri->segment($last);
-
 			$response = $this->ItemModel->deleteItem($item_id);
 			if (!empty($response) AND $response != false)
 			{
