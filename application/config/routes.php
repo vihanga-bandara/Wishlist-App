@@ -57,8 +57,28 @@ $route['translate_uri_dashes'] = FALSE;
 $route['API'] = 'Rest_server';
 
 // Item API Routes
-$route['api/item/add'] = 'api/wishlist/add_item';
-$route['api/items/all'] = 'api/wishlist/fetch_all_items';
+switch ($_SERVER['REQUEST_METHOD'])
+{
+	case 'GET':
+		// fetch single item
+		$route['api/list/item/(:any)'] = 'api/wishlist/fetch_item';
+		// fetch all items
+		$route['api/list/items'] = 'api/wishlist/fetch_all_items';
+		break;
+	case 'POST':
+		// add single item
+		$route['api/list/item'] = 'api/wishlist/add_item';
+		break;
+	case 'PUT':
+		//update a single item
+		$route['api/list/item/(:any)'] = 'api/wishlist/update_item';
+	case 'DELETE':
+		//upssdasda
+		$route['api/list/item/(:any)'] = 'api/wishlist/update_item';
+
+}
+$route['api/list/(:any)'] = 'api/wishlist/add_item';
+$route['api/list/items'] = 'api/wishlist/fetch_all_items';
 
 //User API Routes
 $route['api/user/register'] = 'api/user/register_user';

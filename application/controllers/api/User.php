@@ -138,6 +138,7 @@ class User extends REST_Controller
 					"data" => $login_data,
 					"message" => "User successfully logged in"
 				);
+				$this->session->set_userdata($login_data);
 				$this->response($message, REST_Controller::HTTP_OK);
 			} else
 			{
@@ -153,8 +154,8 @@ class User extends REST_Controller
 
 	}
 
-//	public function Logout()
-//	{
-//
-//	}
+	public function logout_post()
+	{
+		$this->session->sess_destroy();
+	}
 }
