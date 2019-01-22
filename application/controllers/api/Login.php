@@ -89,6 +89,65 @@ class Login extends REST_Controller
 
 	}
 
+	/**
+	 * User Login
+	 * -------------------------
+	 * @param: username
+	 * @param: password
+	 * -------------------------
+	 * @method : POST
+	 * @url : api/user/login
+	 */
+	public function login_user_post()
+	{
+		header("Access-Control-Allow-Origin: *");
+
+		# XSS Filtering (Security)
+		$data = $this->security->xss_clean($_POST);
+		$this->load->library('form_validation');
+
+		//Validation
+		$this->form_validation->set_rules('name', 'Name of User', 'trim|required');
+		$this->form_validation->set_rules('password', 'Password', 'trim|required|max_length[80]');
+
+		if ($this->form_validation->run() == FALSE)
+		{
+			$message = array(
+				"status" => false,
+				"error" => $this->form_validation->error_array(),
+				"message" => $this->validation_errors()
+			);
+			$this->response($message, REST_Controller::HTTP_NOT_FOUND);
+		} else
+		{
+			$register_data = array(
+				"user_name" => $this->input->post("name", TRUE),
+				"user_email" => $this->input->post("email", TRUE),
+				"user_password" => hash("sha256", $this->input->post("password", TRUE)),
+				"user_list_name" => $this->input->post("listName", TRUE),
+				"user_list_desc" => $this->input->post("listDescription", TRUE),
+			);
+			$data = $this->UserModel->registerUser($register_data);
+			if (!empty($data) && ($data > 0))
+			{
+				$message = array(
+					"status" => true,
+					"message" => "Successfully register user"
+				);
+				$this->response($message, REST_Controller::HTTP_CREATED);
+			} else
+			{
+				$message = array(
+					"status" => true,
+					"error" => $this->form_validation->error_array(),
+					"message" => "Unable to complete registration, try again later"
+				);
+				$this->response($message, REST_Controller::HTTP_NOT_FOUND);
+			}
+		}
+
+	}
+
 //	public function Logout()
 //	{
 //
