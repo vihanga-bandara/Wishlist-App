@@ -34,6 +34,8 @@ class Login extends REST_Controller
 	 */
 	public function register_user_post()
 	{
+		header("Access-Control-Allow-Origin: *");
+
 		# XSS Filtering (Security)
 		$data = $this->security->xss_clean($_POST);
 		$this->load->library('form_validation');
@@ -52,15 +54,18 @@ class Login extends REST_Controller
 				"error" => $this->form_validation->error_array(),
 				"message" => $this->validation_errors()
 			);
-			$this->response($message,REST_Controller::HTTP_NOT_FOUND);
+			$this->response($message, REST_Controller::HTTP_NOT_FOUND);
 		} else
 		{
-			$message = array(
-				"status" => true,
-				"error" => $this->form_validation->error_array(),
-				"message" => $this->validation_errors()
+			$register_data = array(
+				"name" => $this->input->post("name", TRUE),
+				"email" => $this->input->post("email", TRUE),
+				"password" => hash("sha256", $this->input->post("password", TRUE)),
+				"listName" => $this->input->post("listName", TRUE),
+				"listDescription" => $this->input->post("listDescription", TRUE),
 			);
-			$this->response($message,REST_Controller::HTTP_NOT_FOUND);
+			$data = $this->UserModel->registerUser($register_data);
+			var_dump($data);
 		}
 
 	}

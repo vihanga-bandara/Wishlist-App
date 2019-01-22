@@ -8,14 +8,20 @@
 
 class UserModel extends CI_Model
 {
- private $username;
- private $password;
+	private $user = "users_tbl";
 
- public function Login(){
+ public function registerUser($register_data)
+ {
+	 $this->db->insert($this->user, $register_data);
+	 return $this->db->insert_id();
+ }
+
+ public function checkUser()
+ {
 
  }
 
- public function Logout(){
-
- }
+// public function logoutUser(){
+//
+// }
 }

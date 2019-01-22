@@ -61,7 +61,6 @@ $route['api/item/add'] = 'api/WishList/add_item';
 $route['api/items/all'] = 'api/WishList/fetch_all_items';
 
 //User API Routes
-$route['api/user/register'] = 'api/WishList/add_item';
-$route['api/items/all'] = 'api/WishList/fetch_all_items';
+$route['api/user/register'] = 'api/Login/register_user';
 
 
