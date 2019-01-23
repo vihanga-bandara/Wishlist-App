@@ -37,7 +37,7 @@ class User extends REST_Controller
 		header("Access-Control-Allow-Origin: *");
 
 		# XSS Filtering (Security)
-		$data = $this->security->xss_clean($_POST);
+		$_POST = $this->security->xss_clean($_POST);
 
 		//Validation
 		$this->form_validation->set_rules('name', 'Name of User', 'trim|required|is_unique[users_tbl.user_name]|alpha_numeric|max_length[20]',
@@ -102,7 +102,7 @@ class User extends REST_Controller
 		header("Access-Control-Allow-Origin: *");
 
 		# XSS Filtering (Security)
-		$data = $this->security->xss_clean($_POST);
+		$_POST = $this->security->xss_clean($_POST);
 		$this->load->library('form_validation');
 
 		//Validation

@@ -35,7 +35,7 @@ class WishList extends REST_Controller
 		if ($this->input->server("REQUEST_METHOD") == "POST")
 		{
 			# XSS Filtering (Security)
-			$data = $this->security->xss_clean($_POST);
+			$_POST = $this->security->xss_clean($_POST);
 
 			//Validation
 			$this->form_validation->set_rules('item_id', 'Item id', 'trim|required');
@@ -98,7 +98,7 @@ class WishList extends REST_Controller
 		if ($this->input->server("REQUEST_METHOD") == "GET")
 		{
 			# XSS Filtering (Security)
-			$data = $this->security->xss_clean($_POST);
+			$_POST = $this->security->xss_clean($_POST);
 
 			$last = $this->uri->total_segments();
 			$item_id = $this->uri->segment($last);
