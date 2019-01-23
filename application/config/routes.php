@@ -49,7 +49,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'WishList';
+$route['default_controller'] = 'Home';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
@@ -71,7 +71,7 @@ switch ($_SERVER['REQUEST_METHOD'])
 		break;
 	case 'PUT':
 		//update a single item
-		$route['api/list/item/(:num)'] = 'api/wishlist/update_item';
+		$route['api/list/item/(:num)'] = 'api/wishlist/item';
 	case 'DELETE':
 		//delete a single item
 		$route['api/list/item/(:num)'] = 'api/wishlist/item';

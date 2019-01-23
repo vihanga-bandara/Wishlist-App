@@ -24,8 +24,12 @@ class WishList extends REST_Controller
 	/**
 	 * Add a new item
 	 * -------------------------
-	 * @param: username
-	 * @param: password
+	 * @param: user_id
+	 * @param: item_name
+	 * @param: item_url
+	 * @param: item_price
+	 * @param: item_description
+	 * @param: item_priority
 	 * -------------------------
 	 * @method : POST
 	 * @url : api/list/item
@@ -35,10 +39,13 @@ class WishList extends REST_Controller
 		if ($this->input->server("REQUEST_METHOD") == "POST")
 		{
 			# XSS Filtering (Security)
+			$_POST = json_decode(file_get_contents("php://input"), true);
 			$_POST = $this->security->xss_clean($_POST);
 
+			//get User Id from session
+			//null checks dapan
+			$user_id = $this->session->user_id;
 			//Validation
-			$this->form_validation->set_rules('item_id', 'Item id', 'trim|required');
 			$this->form_validation->set_rules('item_name', 'Item name', 'trim|required');
 			$this->form_validation->set_rules('item_url', 'Item URL', 'trim|required');
 			$this->form_validation->set_rules('item_price', 'Item price', 'trim|required');
@@ -56,7 +63,7 @@ class WishList extends REST_Controller
 			} else
 			{
 				$postData = array(
-					"item_id" => $this->post("item_id", TRUE),
+					"user_id" => $user_id,
 					"item_name" => $this->post("item_name", TRUE),
 					"item_url" => $this->post("item_url", TRUE),
 					"item_price" => $this->post("item_price", TRUE),
@@ -98,6 +105,7 @@ class WishList extends REST_Controller
 		if ($this->input->server("REQUEST_METHOD") == "GET")
 		{
 			# XSS Filtering (Security)
+			//check this
 			$_POST = $this->security->xss_clean($_POST);
 
 			$last = $this->uri->total_segments();
@@ -141,8 +149,10 @@ class WishList extends REST_Controller
 	{
 		if ($this->input->server("REQUEST_METHOD") == "GET")
 		{
-
-			$data = $this->ItemModel->getAllItems();
+			//null checks dapan
+			//add response template
+			$user_id = $this->session->user_id;
+			$data = $this->ItemModel->getAllItems($user_id);
 			$this->response($data);
 		}
 	}
@@ -159,7 +169,7 @@ class WishList extends REST_Controller
 	 * @method : PUT
 	 * @url : api/list/item/{item_id}
 	 */
-	public function update_item_put()
+	public function item_put()
 	{
 		if ($this->input->server("REQUEST_METHOD") == "PUT")
 		{

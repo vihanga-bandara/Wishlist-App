@@ -26,8 +26,8 @@ class User extends REST_Controller
 	 * @param: name
 	 * @param: email
 	 * @param: password
-	 * @param: list_name
-	 * @param: list_description
+	 * @param: listName
+	 * @param: listDescription
 	 * -------------------------
 	 * @method : POST
 	 * @url : api/user/register
@@ -37,6 +37,7 @@ class User extends REST_Controller
 		header("Access-Control-Allow-Origin: *");
 
 		# XSS Filtering (Security)
+		$_POST = json_decode(file_get_contents("php://input"), true);
 		$_POST = $this->security->xss_clean($_POST);
 
 		//Validation
@@ -72,7 +73,7 @@ class User extends REST_Controller
 			{
 				$message = array(
 					"status" => true,
-					"message" => "Successfully register user"
+					"message" => "Successfully registered user"
 				);
 				$this->response($message, REST_Controller::HTTP_CREATED);
 			} else
@@ -91,7 +92,7 @@ class User extends REST_Controller
 	/**
 	 * User Login
 	 * -------------------------
-	 * @param: username
+	 * @param: name
 	 * @param: password
 	 * -------------------------
 	 * @method : POST
@@ -102,6 +103,7 @@ class User extends REST_Controller
 		header("Access-Control-Allow-Origin: *");
 
 		# XSS Filtering (Security)
+		$_POST = json_decode(file_get_contents("php://input"), true);
 		$_POST = $this->security->xss_clean($_POST);
 		$this->load->library('form_validation');
 
