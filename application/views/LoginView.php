@@ -29,11 +29,11 @@
 			<!--Register-->
 			<input type="text" placeholder="Enter Username" id="reg-username" class="ui-elem ui-elem-rpass --rtn"
 				   required/>
-			<input type="text" placeholder="Enter Password" id="reg-password" class="ui-elem ui-elem-rpass --rtn"
+			<input type="password" placeholder="Enter Password" id="reg-password" class="ui-elem ui-elem-rpass --rtn"
 				   required/>
-			<input type="text" placeholder="Re-type Password" id="rpt-password" class="ui-elem ui-elem-rpass --rtn"
+			<input type="password" placeholder="Re-type Password" id="rpt-password" class="ui-elem ui-elem-rpass --rtn"
 				   required/>
-			<input type="text" placeholder="Enter Email" id="reg-email" class="ui-elem ui-elem-rpass --rtn" required/>
+			<input type="email" placeholder="Enter Email" id="reg-email" class="ui-elem ui-elem-rpass --rtn" required/>
 			<input type="text" placeholder="Enter List Name" id="list-name" class="ui-elem ui-elem-rpass --rtn"
 				   required/>
 			<input type="text" placeholder="Enter List Description" id="description" class="ui-elem ui-elem-rpass --rtn"
@@ -52,6 +52,30 @@
 </script>
 
 <script type="text/template" id="item-template">
+	<div>
+		<form>
+			<label for='ItemName'> Name of Item </label>
+			<input type='text' name='item_name' id='item_name'/> <br>
+
+			<label for='ItemUrl'> URL of Item </label>
+			<input type='text' name='item_url' id='item_url'/> <br>
+
+			<label for='ItemPrice'> Price of Item </label>
+			<input type='text' name='item_price' id='item_price'/> <br>
+
+			<label for='ItemDescription'> Description </label>
+			<input type='text' name='item_description' id='item_description'/> <br>
+
+			<label for='ItemPriority'> Priority of Item </label>
+			<select id="item_priority">
+				<option value="1">Must Have</option>
+				<option value="2">Would be Nice to Have</option>
+				<option value="3">If You Can</option>
+			</select>
+			<br>
+			<input type="submit" value="add item" id="js-btn-add"/>
+		</form>
+	</div>
 	<div class="card" style="width: 18rem;">
 		<div class="card-body">
 			<h5 class="card-title"><%=item_name%></h5>

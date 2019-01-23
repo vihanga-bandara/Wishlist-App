@@ -3,7 +3,8 @@ var app = app || {};
 app.routers.AppRouter = Backbone.Router.extend({
 	routes: {
 		"": "home",
-		"list": "viewList"
+		"list": "viewList",
+		"add": "addList"
 	},
 
 	home: function () {
@@ -23,6 +24,24 @@ app.routers.AppRouter = Backbone.Router.extend({
 			app.listView = new app.views.ListView({collection: new app.collections.ItemCollection()});
 			var url = app.listView.collection.url
 			app.listView.collection.fetch({
+				reset:true,
+				"url": url,
+				wait:true,
+				success: function (collection, response) {
+					console.log("init");
+					app.listView.render();
+
+				}
+			});
+
+		}
+	},
+
+	addList: function () {
+		if (!app.listView) {
+			app.listView = new app.views.ListView({collection: new app.collections.ItemCollection()});
+			var url = app.listView.collection.url
+			app.listView.collection.save({
 				reset:true,
 				"url": url,
 				wait:true,

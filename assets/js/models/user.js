@@ -5,8 +5,12 @@ app.models.User = Backbone.Model.extend({
 		name: "",
 		password: "",
 		user_id: null,
-		list_name: "",
-		list_description: ""
+		email: "",
+		listName: "",
+		listDescription: "",
+		error: "",
+		message: "",
+		status: "",
 	},
 	url: '/wishlist-app/api/user/',
 });

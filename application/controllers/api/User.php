@@ -127,13 +127,20 @@ class User extends REST_Controller
 			$login_data = $this->UserModel->loginUser($user_name, $user_password);
 			if (!empty($login_data) AND $login_data != false)
 			{
+				$loginData = array(
+					"user_id" => $login_data->user_id,
+					"user_name" => $login_data->user_name,
+					"user_email" => $login_data->user_email,
+					"user_list_name" => $login_data->user_list_name,
+					"user_list_description" => $login_data->user_list_description
+				);
 				$message = array(
 					"status" => true,
-					"data" => $login_data,
+					"data" => $loginData,
 					"user_id" => $login_data->user_id,
 					"message" => "User successfully logged in"
 				);
-				$this->session->set_userdata($login_data);
+				$this->session->set_userdata($loginData);
 				$this->response($message, REST_Controller::HTTP_OK);
 			} else
 			{
