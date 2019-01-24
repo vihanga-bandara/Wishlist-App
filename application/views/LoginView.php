@@ -108,7 +108,7 @@
 
 	</div>
 
-	<button id="btn-add-item" class="ui-button""><a href="#list/add">Add Item</a></button>
+	<button id="btn-add-item" class="ui-button">Add Item</a></button>
 </script>
 
 <script type="text/template" id="add-item-template">
@@ -117,27 +117,28 @@
 			<form>
 				<div class="form-group">
 					<label for='ItemName'> Name of Item </label>
-					<input type='text' class='form-control' name='item_name' id='item_name'/>
+					<input type='text' class='form-control text-left' name='item_name' id='item_name'/>
 				</div>
 
 				<div class="form-group">
 					<label for='ItemUrl'> URL of Item </label>
-					<input type='text' class='form-control' name='item_url' id='item_url'/>
+					<input type='text' class='form-control text-left' name='item_url' id='item_url'/>
 				</div>
 
 				<div class="form-group">
 					<label for='ItemPrice'> Price of Item </label>
-					<input type='text' class='form-control' name='item_price' id='item_price'/>
+					<input type='number' class='form-control text-left' name='item_price' id='item_price'/>
 				</div>
 
 				<div class="form-group">
 					<label for='ItemDescription'> Item Description </label>
-					<textarea class="form-control" id='item_description' name='item_description' rows="3"></textarea>
+					<textarea class="form-control text-left" id='item_description' name='item_description' rows="3"></textarea>
 				</div>
 
 				<div class="form-group">
 					<label for='ItemPriority'> Priority of Item </label>
-					<select class='form-control' id="item_priority">
+					<select class='form-control text-left' id="item_priority">
+						<option selected="selected">Select Priority</option>
 						<option value="1">Must Have</option>
 						<option value="2">Would be Nice to Have</option>
 						<option value="3">If You Can</option>
@@ -171,9 +172,15 @@
 	</table>
 </script>
 
+<div class="container"></div>
+
 <div class="container-add"></div>
 
-<div class="container"></div>
+<div class="container-update"></div>
+
+<div class="container-delete"></div>
+
+
 </body>
 </html>
 

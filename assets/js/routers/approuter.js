@@ -24,25 +24,33 @@ app.routers.AppRouter = Backbone.Router.extend({
 			app.listView = new app.views.ListView({collection: new app.collections.ItemCollection()});
 			var url = app.listView.collection.url
 			app.listView.collection.fetch({
-				reset:true,
+				reset: true,
 				"url": url,
-				wait:true,
+				wait: true,
 				success: function (collection, response) {
 					console.log("init");
 					app.listView.render();
 				}
 			});
+		} else if(app.addItemView){
+			$(".container-add").html("");
+			app.listView.render();
+		}
+		else{
+			app.listView.render();
 		}
 	},
 
 	addList: function () {
-			if (!app.addItemView) {
-				app.addItemView = new app.views.addItemView({model: new app.models.Item()});
-				app.addItemView.render();
+		if (!app.addItemView) {
+			app.addItemView = new app.views.addItemView({model: new app.models.Item()});
+			$(".container").html("");
+			app.addItemView.render();
 
-			}else{
-				console.log("Not successful")
-			}
+
+		} else {
+			console.log("Not successful")
+		}
 	}
 
 });

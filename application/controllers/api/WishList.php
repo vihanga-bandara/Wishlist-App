@@ -45,6 +45,14 @@ class WishList extends REST_Controller
 			//get User Id from session
 			//null checks dapan
 			$user_id = $this->session->user_id;
+			if(empty($user_id)){
+				$message = array(
+					"status" => false,
+					"error" => "Session data not set for user",
+					"message" => "Session has expired, Please Login again"
+				);
+				$this->response($message, REST_Controller::HTTP_BAD_REQUEST);
+			}
 			//Validation
 			$this->form_validation->set_rules('item_name', 'Item name', 'trim|required');
 			$this->form_validation->set_rules('item_url', 'Item URL', 'trim|required');
