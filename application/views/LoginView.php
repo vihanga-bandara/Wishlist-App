@@ -153,6 +153,55 @@
 
 </script>
 
+<script type="text/template" id="update-item-template">
+	<div class="row">
+		<div class="col-md-6 offset-md-3 banda-cust">
+			<form>
+				<div class="form-group">
+					<label for='ItemName'> Item Id </label>
+					<input type='text' class='form-control text-left' value="<%=item_id%>" name='item_name' id='item_name'/>
+				</div>
+				<div class="form-group">
+					<label for='ItemName'> Name of Item </label>
+					<input type='text' class='form-control text-left' value="<%=item_name%>" name='item_name' id='item_name'/>
+				</div>
+
+				<div class="form-group">
+					<label for='ItemUrl'> URL of Item </label>
+					<input type='text' class='form-control text-left' value="<%=item_url%>"name='item_url' id='item_url'/>
+				</div>
+
+				<div class="form-group">
+					<label for='ItemPrice'> Price of Item </label>
+					<input type='number' class='form-control text-left' value="<%=item_price%>"name='item_price' id='item_price'/>
+				</div>
+
+				<div class="form-group">
+					<label for='ItemDescription'> Item Description </label>
+					<textarea class="form-control text-left" id='item_description' value="<%=item_description%>" name='item_description' rows="3"></textarea>
+				</div>
+
+				<div class="form-group">
+					<label for='Selected Value'><%=item_priority%></label><br>
+					<label for='ItemPriority'> Priority of Item </label>
+
+					<select class='form-control text-left' id="item_priority">
+						<option selected="selected">Select Priority</option>
+						<option value="1">Must Have</option>
+						<option value="2">Would be Nice to Have</option>
+						<option value="3">If You Can</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<button id="js-btn-add" class='form-control btn btn-primary' value="add item">Add Item</a></button>
+					<button id="go-back" class='form-control btn btn-primary' value="Go Back">Go Back</a></button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+</script>
+
 <script type="text/template" id="item-template">
 	<table>
 		<tbody>
@@ -164,8 +213,8 @@
 			<td><%=item_priority%></td>
 			<td><a href="<%=item_url%>" class="card-link">View</a></td>
 			<td>
-				<button id="js-btn-edit" class="btn btn-primary">Edit</button>
-				<button id="js-btn-delete" class="btn btn-danger">Delete</button>
+				<button id="btn-update-item" value="<%=item_id%>" class="btn btn-primary">Edit</button>
+				<button id="btn-delete-item" value="<%=item_id%>" class="btn btn-danger">Delete</button>
 			</td>
 		</tr>
 		</tbody>

@@ -28,6 +28,7 @@
 	<script src="<?php echo base_url(); ?>assets/js/views/listView.js"></script>
 	<script src="<?php echo base_url(); ?>assets/js/views/itemView.js"></script>
 	<script src="<?php echo base_url(); ?>assets/js/views/addItemView.js"></script>
+	<script src="<?php echo base_url(); ?>assets/js/views/updateItemView.js"></script>
 	<script src="<?php echo base_url(); ?>assets/js/routers/approuter.js"></script>
 
 

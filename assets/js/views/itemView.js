@@ -6,7 +6,6 @@ app.views.ItemView = Backbone.View.extend({
 	render:function () {
 		template = _.template($('#item-template').html());
 		this.$el.append(template(this.model.attributes));
-
 	}
 });
 

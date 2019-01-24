@@ -4,7 +4,8 @@ app.routers.AppRouter = Backbone.Router.extend({
 	routes: {
 		"": "home",
 		"list": "viewList",
-		"list/add": "addList"
+		"list/add": "addList",
+		"list/update/:id": "updateList"
 	},
 
 	home: function () {
@@ -51,6 +52,19 @@ app.routers.AppRouter = Backbone.Router.extend({
 		} else {
 			console.log("Not successful")
 		}
-	}
+	},
+	updateList: function (e) {
+		if (!app.updateItemView) {
+			var collection = app.listView.collection;
+			var existing_arr = collection.models;
+			var newVal = existing_arr.find(function(el){
+				return el.attributes.item_id == e;
+			});
+
+			app.updateItemView = new app.views.updateItemView ({model: newVal});
+			// app.updateItemView = app.listView;
+			app.updateItemView.render();
+			}
+		}
 
 });
