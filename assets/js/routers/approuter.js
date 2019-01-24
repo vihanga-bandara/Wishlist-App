@@ -5,7 +5,10 @@ app.routers.AppRouter = Backbone.Router.extend({
 		"": "home",
 		"list": "viewList",
 		"list/add": "addList",
-		"list/update/:id": "updateList"
+		"list/update/:id": "updateList",
+		"list/delete/:id": "deleteList",
+		"share": "shareList",
+		"logout": "logout"
 	},
 
 	home: function () {
@@ -33,14 +36,14 @@ app.routers.AppRouter = Backbone.Router.extend({
 					app.listView.render();
 				}
 			});
-		} else if(app.addItemView){
+		} else if (app.addItemView) {
 			$(".container-add").html("");
 			app.listView.render();
-		} else if(app.updateItemView){
+		} else if (app.updateItemView) {
 			$(".container-update").html("");
 			app.listView.render();
 		}
-		else{
+		else {
 			app.listView.render();
 		}
 	},
@@ -60,14 +63,42 @@ app.routers.AppRouter = Backbone.Router.extend({
 		if (!app.updateItemView) {
 			var collection = app.listView.collection;
 			var existing_arr = collection.models;
-			var newVal = existing_arr.find(function(el){
+			var newVal = existing_arr.find(function (el) {
 				return el.attributes.item_id == e;
 			});
 
-			app.updateItemView = new app.views.updateItemView ({model: newVal});
+			app.updateItemView = new app.views.updateItemView({model: newVal});
 			// app.updateItemView = app.listView;
 			app.updateItemView.render();
-			}
 		}
+	},
+	deleteList: function (e) {
+		if (!app.deleteItemView) {
+			var collection = app.listView.collection;
+			var existing_arr = collection.models;
+			var newVal = existing_arr.find(function (el) {
+				return el.attributes.item_id == e;
+			});
 
+			app.deleteItemView = new app.views.deleteItemView({model: newVal});
+			// app.deleteItemView = app.listView;
+			app.deleteItemView.render();
+		}
+	},
+	shareList: function (e) {
+		if (!app.shareListView) {
+			app.shareListView = new app.views.shareListView({collection: new app.collections.ItemCollection()});
+			var url = app.shareListView.collection.url
+			app.shareListView.collection.fetch({
+				reset: true,
+				"url": url,
+				wait: true,
+				success: function (collection, response) {
+					console.log("init");
+					$(".container").html("");
+					app.shareListView.render();
+				}
+			});
+		}
+	}
 });

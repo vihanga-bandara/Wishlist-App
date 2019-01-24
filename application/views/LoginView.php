@@ -108,8 +108,31 @@
 
 	</div>
 
-	<button id="btn-add-item" class="ui-button">Add Item</a></button>
-	<button id="btn-share-list" class="ui-button">Share List</a></button>
+	<button id="btn-add-item" class="ui-button">Add Item</button>
+	<button id="btn-share-list" class="ui-button">Share List</button>
+	<button id="btn-logout" class="ui-button">Logout</button>
+</script>
+
+<script type="text/template" id="list-template-share">
+	<div class="row">
+		<div id="placing">
+			<table class="pure-table">
+				<thead>
+				<tr>
+					<th>Item Id</th>
+					<th>Item Name</th>
+					<th>Item Price</th>
+					<th>Item Description</th>
+					<th>Item Priority</th>
+				</tr>
+				</thead>
+
+			</table>
+		</div>
+
+	</div>
+	<button id="go-back" class="btn btn-primary">Go back</button>
+	<button id="#" class="btn btn-success"><a href="www.gmail.com">Email List</a></button>
 </script>
 
 <script type="text/template" id="add-item-template">
@@ -221,6 +244,21 @@
 	</table>
 </script>
 
+<script type="text/template" id="item-template-share">
+	<table>
+		<tbody>
+		<tr>
+			<td><%=item_id%></td>
+			<td><%=item_name%></td>
+			<td><%=item_price%></td>
+			<td><%=item_description%></td>
+			<td><%=item_priority%></td>
+			<td><a href="<%=item_url%>" class="card-link">View</a></td>
+		</tr>
+		</tbody>
+	</table>
+</script>
+
 <div class="container"></div>
 
 <div class="container-add"></div>
@@ -228,6 +266,8 @@
 <div class="container-update"></div>
 
 <div class="container-delete"></div>
+
+<div class="container-share"></div>
 
 
 </body>

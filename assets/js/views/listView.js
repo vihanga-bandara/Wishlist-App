@@ -18,6 +18,7 @@ app.views.ListView = Backbone.View.extend({
 		"click #btn-update-item": "update_item",
 		"click #btn-delete-item": "delete_item",
 		"click #btn-share-list": "share_list",
+		"click #btn-logout": "logout",
 	},
 	add_item: function () {
 		if (!app.addItemView) {
@@ -43,7 +44,7 @@ app.views.ListView = Backbone.View.extend({
 
 			app.appRouter.navigate("#list/delete/" + $id, {trigger: true, replace: true});
 		} else {
-			console.log("Not successful going to update page");
+			console.log("Not successful going to delete page");
 		}
 
 	},
@@ -53,7 +54,17 @@ app.views.ListView = Backbone.View.extend({
 
 			app.appRouter.navigate("#share", {trigger: true, replace: true});
 		} else {
-			console.log("Not successful going to update page");
+			console.log("Not successful going to share list page");
+		}
+
+	},
+	logout: function (e) {
+		$id = $(e.currentTarget).val();
+		if (!app.updateItemView) {
+
+			app.appRouter.navigate("#logout", {trigger: true, replace: true});
+		} else {
+			console.log("Not successful logging out");
 		}
 
 	}
