@@ -15,7 +15,6 @@ app.views.addItemView = Backbone.View.extend({
 	e.stopPropagation();
 	var validateForm = validateAddForm();
 	if (!validateForm) {
-		console.log("validation error")
 	} else {
 		this.model.set(validateForm);
 		var url = this.model.url;

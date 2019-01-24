@@ -141,7 +141,6 @@ include ("header.php");
 					},
 
 					success: function (data) {
-						console.log(name, url, price);
 						$("#data").load(location.href + " #data");
 						$("#message").html("You have successfully added an item to your list");
 						$("#message").show().fadeOut(3000);

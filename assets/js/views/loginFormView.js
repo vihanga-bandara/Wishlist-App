@@ -16,7 +16,6 @@ app.views.LoginFormView = Backbone.View.extend({
 		e.stopPropagation();
 		var validateForm = validateLoginForm();
 		if (!validateForm) {
-			console.log("validation error")
 		} else {
 			this.model.set(validateForm);
 			var url = this.model.url + "login";
@@ -34,7 +33,6 @@ app.views.LoginFormView = Backbone.View.extend({
 		e.stopPropagation();
 		var validateForm = validateRegisterForm();
 		if (!validateForm) {
-			console.log("validation error")
 		} else {
 			this.model.set(validateForm);
 			var url = this.model.url + "register";

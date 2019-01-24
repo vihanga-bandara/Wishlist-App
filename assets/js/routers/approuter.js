@@ -16,10 +16,6 @@ app.routers.AppRouter = Backbone.Router.extend({
 			app.user = new app.models.User();
 			app.loginView = new app.views.LoginFormView({model: app.user});
 			app.loginView.render();
-		} else {
-			console.log("already logged");
-			app.listView = new app.views.ListView({model: new app.collections.ItemCollection()});
-			app.listView.render();
 		}
 	},
 
@@ -32,7 +28,6 @@ app.routers.AppRouter = Backbone.Router.extend({
 				"url": url,
 				wait: true,
 				success: function (collection, response) {
-					console.log("init");
 					app.listView.render();
 				}
 			});
@@ -94,7 +89,6 @@ app.routers.AppRouter = Backbone.Router.extend({
 				"url": url,
 				wait: true,
 				success: function (collection, response) {
-					console.log("init");
 					$(".container").html("");
 					app.shareListView.render();
 				}
