@@ -44,47 +44,53 @@
 	</div>
 	<script src="../../../wishlist-app/assets/js/index.js"></script>
 </script>
+<script></script>
+
+
+
 
 <script type = "text/template" id="list-template">
-	<div id = "item" >
+<div class="row">
+	<div id="item">
+		<table class="pure-table">
+			<thead>
+			<tr>
+				<th>Item Id</th>
+				<th>Item Name</th>
+				<th>Item Price</th>
+				<th>Item Description</th>
+				<th>Item Priority</th>
+				<th>#</th>
+				<th>#</th>
+			</tr>
+			</thead>
 
+		</table>
 	</div>
+
+</div>
+
+	<button id="#" class="ui-button"">Add Item</button>
 </script>
 
 <script type="text/template" id="item-template">
-	<div>
-		<form>
-			<label for='ItemName'> Name of Item </label>
-			<input type='text' name='item_name' id='item_name'/> <br>
+	<table>
+		<tbody>
+		<tr>
+			<td><%=item_id%></td>
+			<td><%=item_name%></td>
+			<td><%=item_price%></td>
+			<td><%=item_description%></td>
+			<td><%=item_priority%></td>
+			<td><a href="<%=item_url%>" class="card-link">View</a></td>
+			<td>
+				<button id="js-btn-edit" class="btn btn-primary">Edit</button>
+				<button id="js-btn-delete" class="btn btn-danger">Delete</button>
+			</td>
+		</tr>
+		</tbody>
+	</table>
 
-			<label for='ItemUrl'> URL of Item </label>
-			<input type='text' name='item_url' id='item_url'/> <br>
-
-			<label for='ItemPrice'> Price of Item </label>
-			<input type='text' name='item_price' id='item_price'/> <br>
-
-			<label for='ItemDescription'> Description </label>
-			<input type='text' name='item_description' id='item_description'/> <br>
-
-			<label for='ItemPriority'> Priority of Item </label>
-			<select id="item_priority">
-				<option value="1">Must Have</option>
-				<option value="2">Would be Nice to Have</option>
-				<option value="3">If You Can</option>
-			</select>
-			<br>
-			<input type="submit" value="add item" id="js-btn-add"/>
-		</form>
-	</div>
-	<div class="card" style="width: 18rem;">
-		<div class="card-body">
-			<h5 class="card-title"><%=item_name%></h5>
-			<h6 class="card-subtitle mb-2 text-muted">Rs.<%=item_price%></h6>
-			<p class="card-text"><%=item_description%></p>
-			<a href="<%=item_url%>" class="card-link">View</a>
-
-		</div>
-	</div>
 </script>
 <div class="container">
 

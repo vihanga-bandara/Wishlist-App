@@ -14,5 +14,8 @@ app.views.ListView = Backbone.View.extend({
 		});
 
 	},
+	events: {
+		"click #js-add": "do_register",
+	},
 
 });

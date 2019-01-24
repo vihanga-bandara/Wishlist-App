@@ -38,7 +38,7 @@ app.routers.AppRouter = Backbone.Router.extend({
 	},
 
 	addList: function () {
-		if (!app.listView) {
+		if (!app.addView) {
 			app.listView = new app.views.ListView({collection: new app.collections.ItemCollection()});
 			var url = app.listView.collection.url
 			app.listView.collection.save({
