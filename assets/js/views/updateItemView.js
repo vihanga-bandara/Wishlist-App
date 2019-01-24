@@ -4,8 +4,8 @@ app.views.updateItemView = Backbone.View.extend({
 	el:".container-update",
 	render: function () {
 		template = _.template($('#update-item-template').html());
+		$(".container").html("");
 		this.$el.append(template(this.model.attributes));
-
 	},
 	events: {
 		"click #js-btn-add": "update_item",

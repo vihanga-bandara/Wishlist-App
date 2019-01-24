@@ -178,7 +178,7 @@
 
 				<div class="form-group">
 					<label for='ItemDescription'> Item Description </label>
-					<textarea class="form-control text-left" id='item_description' value="<%=item_description%>" name='item_description' rows="3"></textarea>
+					<textarea class="form-control text-left" id='item_description' value="<%=item_description%>" name='item_description' rows="3"><%=item_description%></textarea>
 				</div>
 
 				<div class="form-group">
@@ -193,8 +193,8 @@
 					</select>
 				</div>
 				<div class="form-group">
-					<button id="js-btn-add" class='form-control btn btn-primary' value="add item">Add Item</a></button>
-					<button id="go-back" class='form-control btn btn-primary' value="Go Back">Go Back</a></button>
+					<button id="js-btn-add" class='btn btn-success' value="add item">Add Item</a></button>
+					<button id="go-back" class=' btn btn-primary' value="Go Back">Go Back</a></button>
 				</div>
 			</form>
 		</div>
