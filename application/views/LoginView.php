@@ -109,6 +109,7 @@
 	</div>
 
 	<button id="btn-add-item" class="ui-button">Add Item</a></button>
+	<button id="btn-share-list" class="ui-button">Share List</a></button>
 </script>
 
 <script type="text/template" id="add-item-template">
@@ -158,8 +159,7 @@
 		<div class="col-md-6 offset-md-3 banda-cust">
 			<form>
 				<div class="form-group">
-					<label for='ItemName'> Item Id </label>
-					<input type='text' class='form-control text-left' value="<%=item_id%>" name='item_name' id='item_name'/>
+					<label for='ItemName'>Item Id : <%=item_id%></label>
 				</div>
 				<div class="form-group">
 					<label for='ItemName'> Name of Item </label>
@@ -182,8 +182,8 @@
 				</div>
 
 				<div class="form-group">
-					<label for='Selected Value'><%=item_priority%></label><br>
-					<label for='ItemPriority'> Priority of Item </label>
+					<label for='Selected Value'>Priority of Item : <%=item_priority%></label><br>
+					<label for='ItemPriority'> Select Priority </label>
 
 					<select class='form-control text-left' id="item_priority">
 						<option selected="selected">Select Priority</option>

@@ -14,12 +14,12 @@ app.views.updateItemView = Backbone.View.extend({
 	update_item: function (e) {
 		e.preventDefault();
 		e.stopPropagation();
-		var validateForm = validateUpdateForm();
+		var validateForm = validateAddForm();
 		if (!validateForm) {
 			console.log("validation error")
 		} else {
 			this.model.set(validateForm);
-			var url = this.model.url;
+			var url = this.model.url + this.model.get("item_id");
 			this.model.save(this.model.attributes, {
 				"url": url,
 				success: function (model, response) {

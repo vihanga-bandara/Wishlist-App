@@ -23,6 +23,7 @@ class ItemModel extends CI_Model
 	{
 		$this->db->select("*");
 		$this->db->where("user_id", $user_id);
+		$this->db->order_by("item_priority", "asc");
 		$this->db->from($this->item_tbl_name);
 		$query = $this->db->get();
 		return $query->result();

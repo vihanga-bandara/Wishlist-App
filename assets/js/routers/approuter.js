@@ -36,6 +36,9 @@ app.routers.AppRouter = Backbone.Router.extend({
 		} else if(app.addItemView){
 			$(".container-add").html("");
 			app.listView.render();
+		} else if(app.updateItemView){
+			$(".container-update").html("");
+			app.listView.render();
 		}
 		else{
 			app.listView.render();

@@ -16,6 +16,8 @@ app.views.ListView = Backbone.View.extend({
 	events: {
 		"click #btn-add-item": "add_item",
 		"click #btn-update-item": "update_item",
+		"click #btn-delete-item": "delete_item",
+		"click #btn-share-list": "share_list",
 	},
 	add_item: function () {
 		if (!app.addItemView) {
@@ -30,6 +32,26 @@ app.views.ListView = Backbone.View.extend({
 		if (!app.updateItemView) {
 
 			app.appRouter.navigate("#list/update/" + $id, {trigger: true, replace: true});
+		} else {
+			console.log("Not successful going to update page");
+		}
+
+	},
+	delete_item: function (e) {
+		$id = $(e.currentTarget).val();
+		if (!app.updateItemView) {
+
+			app.appRouter.navigate("#list/delete/" + $id, {trigger: true, replace: true});
+		} else {
+			console.log("Not successful going to update page");
+		}
+
+	},
+	share_list: function (e) {
+		$id = $(e.currentTarget).val();
+		if (!app.updateItemView) {
+
+			app.appRouter.navigate("#share", {trigger: true, replace: true});
 		} else {
 			console.log("Not successful going to update page");
 		}
