@@ -4,7 +4,7 @@ app.routers.AppRouter = Backbone.Router.extend({
 	routes: {
 		"": "home",
 		"list": "viewList",
-		"add": "addList"
+		"list/add": "addList"
 	},
 
 	home: function () {
@@ -30,29 +30,19 @@ app.routers.AppRouter = Backbone.Router.extend({
 				success: function (collection, response) {
 					console.log("init");
 					app.listView.render();
-
 				}
 			});
-
 		}
 	},
 
 	addList: function () {
-		if (!app.addView) {
-			app.listView = new app.views.ListView({collection: new app.collections.ItemCollection()});
-			var url = app.listView.collection.url
-			app.listView.collection.save({
-				reset:true,
-				"url": url,
-				wait:true,
-				success: function (collection, response) {
-					console.log("init");
-					app.listView.render();
+			if (!app.addItemView) {
+				app.addItemView = new app.views.addItemView({model: new app.models.Item()});
+				app.addItemView.render();
 
-				}
-			});
-
-		}
+			}else{
+				console.log("Not successful")
+			}
 	}
 
 });

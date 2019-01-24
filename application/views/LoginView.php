@@ -10,7 +10,45 @@
 	<link rel='stylesheet' href="../../../wishlist-app/assets/css/rwxgep.css">
 	<link rel="stylesheet" href="../../../wishlist-app/assets/css/style.css">
 
+	<style>
+		.container {
+			background-color: #9b59b6;
+			max-width: 100%;
+			padding-right: 0;
+			padding-left: 0;
+		}
 
+		.wrap.--new {
+			padding: 11% 0;
+		}
+
+		.wrap.--rtn {
+			padding: 11% 0;
+		}
+
+		.select__list {
+			top: 25%;
+		}
+
+		.pointer {
+			left: 5rem;
+		}
+
+		.pointer.--new {
+			right: 4rem;
+			left: unset;
+		}
+
+		.banda-cust .form-control {
+			height: 38px;
+			font-size: 15px;
+		}
+
+		.banda-cust label {
+			margin-bottom: 0 !important;
+			font-size: 13px;
+		}
+	</style>
 </head>
 <body>
 
@@ -44,33 +82,74 @@
 	</div>
 	<script src="../../../wishlist-app/assets/js/index.js"></script>
 </script>
-<script></script>
 
 
+<script ></script>
 
 
-<script type = "text/template" id="list-template">
-<div class="row">
-	<div id="item">
-		<table class="pure-table">
-			<thead>
-			<tr>
-				<th>Item Id</th>
-				<th>Item Name</th>
-				<th>Item Price</th>
-				<th>Item Description</th>
-				<th>Item Priority</th>
-				<th>#</th>
-				<th>#</th>
-			</tr>
-			</thead>
+<script type="text/template" id="list-template">
+	<div class="row">
+		<div id="item">
+			<table class="pure-table">
+				<thead>
+				<tr>
+					<th>Item Id</th>
+					<th>Item Name</th>
+					<th>Item Price</th>
+					<th>Item Description</th>
+					<th>Item Priority</th>
+					<th>#</th>
+					<th>#</th>
+				</tr>
+				</thead>
 
-		</table>
+			</table>
+		</div>
+
 	</div>
 
-</div>
+	<button id="btn-add-item" class="ui-button""><a href="#list/add">Add Item</a></button>
+</script>
 
-	<button id="#" class="ui-button"">Add Item</button>
+<script type="text/template" id="add-item-template">
+	<div class="row">
+		<div class="col-md-6 offset-md-3 banda-cust">
+			<form>
+				<div class="form-group">
+					<label for='ItemName'> Name of Item </label>
+					<input type='text' class='form-control' name='item_name' id='item_name'/>
+				</div>
+
+				<div class="form-group">
+					<label for='ItemUrl'> URL of Item </label>
+					<input type='text' class='form-control' name='item_url' id='item_url'/>
+				</div>
+
+				<div class="form-group">
+					<label for='ItemPrice'> Price of Item </label>
+					<input type='text' class='form-control' name='item_price' id='item_price'/>
+				</div>
+
+				<div class="form-group">
+					<label for='ItemDescription'> Item Description </label>
+					<textarea class="form-control" id='item_description' name='item_description' rows="3"></textarea>
+				</div>
+
+				<div class="form-group">
+					<label for='ItemPriority'> Priority of Item </label>
+					<select class='form-control' id="item_priority">
+						<option value="1">Must Have</option>
+						<option value="2">Would be Nice to Have</option>
+						<option value="3">If You Can</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<button id="js-btn-add" class='form-control btn btn-primary' value="add item">Add Item</a></button>
+				</div>
+			</form>
+		</div>
+	</div>
+
 </script>
 
 <script type="text/template" id="item-template">
@@ -90,41 +169,13 @@
 		</tr>
 		</tbody>
 	</table>
-
 </script>
-<div class="container">
 
-</div>
+<div class="container-add"></div>
+
+<div class="container"></div>
 </body>
 </html>
-<style>
-	.container {
-		background-color: #9b59b6;
-		max-width: 100%;
-		padding-right: 0;
-		padding-left: 0;
-	}
 
-	.wrap.--new {
-		padding: 11% 0;
-	}
-
-	.wrap.--rtn {
-		padding: 11% 0;
-	}
-
-	.select__list {
-		top: 25%;
-	}
-
-	.pointer {
-		left: 5rem;
-	}
-
-	.pointer.--new {
-		right: 4rem;
-		left: unset;
-	}
-</style>
 
 
