@@ -108,8 +108,8 @@ class User extends REST_Controller
 		$this->load->library('form_validation');
 
 		//Validation
-		$this->form_validation->set_rules('name', 'Name of User', 'trim|required');
-		$this->form_validation->set_rules('password', 'Password', 'trim|required|max_length[80]');
+		$this->form_validation->set_rules('user_name', 'Name of User', 'trim|required');
+		$this->form_validation->set_rules('user_password', 'Password', 'trim|required|max_length[80]');
 
 		if ($this->form_validation->run() == FALSE)
 		{
@@ -121,8 +121,8 @@ class User extends REST_Controller
 			$this->response($message, REST_Controller::HTTP_BAD_REQUEST);
 		} else
 		{
-			$user_name = $this->post("name", TRUE);
-			$user_password = $this->post("password", TRUE);
+			$user_name = $this->post("user_name", TRUE);
+			$user_password = $this->post("user_password", TRUE);
 
 			$login_data = $this->UserModel->loginUser($user_name, $user_password);
 			if (!empty($login_data) AND $login_data != false)
@@ -135,12 +135,14 @@ class User extends REST_Controller
 					"user_list_description" => $login_data->user_list_description
 				);
 				$message = array(
+					"id"=> $login_data->user_id,
 					"status" => true,
 					"data" => $loginData,
 					"user_id" => $login_data->user_id,
 					"message" => "User successfully logged in"
 				);
 				$this->session->set_userdata($loginData);
+				$this->UserModel->activateUser($login_data->user_id);
 				$this->response($message, REST_Controller::HTTP_OK);
 			} else
 			{

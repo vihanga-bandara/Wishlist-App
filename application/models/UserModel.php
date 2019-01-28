@@ -41,6 +41,12 @@ class UserModel extends CI_Model
 		}
 	}
 
+	public function activateUser($user_id){
+		$newStatus = array('user_active' => 1);
+		$this->db->where("user_id", $user_id);
+		$this->db->update($this->user, $newStatus);
+	}
+
 // public function logoutUser(){
 //
 // }

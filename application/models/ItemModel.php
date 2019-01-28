@@ -33,7 +33,7 @@ class ItemModel extends CI_Model
 	{
 		$this->db->insert($this->item_tbl_name, $postData);
 //		return $this->db->insert_id();
-		return $postData;
+		return $this->db->insert_id();
 	}
 
 	public function updateItem($item_name, $item_url, $item_price, $item_description, $item_priority, $item_id)

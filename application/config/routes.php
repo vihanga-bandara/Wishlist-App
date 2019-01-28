@@ -68,10 +68,11 @@ switch ($_SERVER['REQUEST_METHOD'])
 	case 'POST':
 		// add single item
 		$route['api/list/item'] = 'api/wishlist/add_item';
+		$route['api/list/item/(:num)'] = 'api/wishlist/item';
 		break;
 	case 'PUT':
-		//update a single item
-		$route['api/list/item/(:num)'] = 'api/wishlist/item';
+//		//update a single item
+//		$route['api/list/item/(:num)'] = 'api/wishlist/item';
 	case 'DELETE':
 		//delete a single item
 		$route['api/list/item/(:num)'] = 'api/wishlist/item';
