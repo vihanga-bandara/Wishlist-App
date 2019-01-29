@@ -8,7 +8,8 @@ app.routers.MainRouter = Backbone.Router.extend({
 		"home/add": "addList",
 		"home/update/:id": "updateList",
 		"home/delete": "deleteList",
-		"share": "shareList",
+		"share/:id": "sharedLink",
+		// "share": "shareList",
 	},
 	login: function (e) {
 		app.user = new app.models.User();
@@ -80,23 +81,29 @@ app.routers.MainRouter = Backbone.Router.extend({
 			app.updateItemView.render();
 		}
 	},
-	shareList: function (e) {
-		app.shareListView = new app.views.shareListView({
-			collection: new app.collections.ItemCollection()
+	sharedLink: function (id) {
+		var getUserUrl = app.user.url + id;
+		app.shareListView = new app.views.shareListView(
+			{collection: new app.collections.ItemCollection(), model: new app.models.User()});
+		app.shareListView.model.fetch({
+			reset: true,
+			"url": getUserUrl,
+			wait: true,
+			success: function (model, response) {
+				console.log(response);
+			}
 		});
-		var url = app.shareListView.collection.url
+
+		var url = app.shareListView.collection.url + id;
 		app.shareListView.collection.fetch({
 			reset: true,
 			"url": url,
 			wait: true,
 			success: function (collection, response) {
-				cleanHTML();
 				app.shareListView.render();
-				$("#show_url").hide();
 			}
 		});
 	}
-
 });
 
 function cleanHTML() {

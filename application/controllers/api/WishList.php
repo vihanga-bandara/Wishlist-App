@@ -177,6 +177,23 @@ class WishList extends REST_Controller
 	}
 
 	/**
+	 * Fetch all existing items using Id
+	 * -------------------------
+	 * @method : GET
+	 * @url : api/list/item/{id}
+	 */
+	public function fetch_all_items_user_get()
+	{
+		if ($this->input->server("REQUEST_METHOD") == "GET")
+		{
+			$last = $this->uri->total_segments();
+			$user_id = $this->uri->segment($last);
+			$data = $this->ItemModel->getAllItems($user_id);
+			$this->response($data);
+		}
+	}
+
+	/**
 	 * Update existing item
 	 * -------------------------
 	 * @param: item_name

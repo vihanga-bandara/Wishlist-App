@@ -90,7 +90,6 @@ app.views.HomeView = Backbone.View.extend({
 		var url = newVal.url + id;
 		newVal.destroy({
 			url: url,
-			wait: true,
 			success: function (model, response) {
 				app.viewHome.collection.remove(newVal);
 				app.viewHome.render();
@@ -102,8 +101,7 @@ app.views.HomeView = Backbone.View.extend({
 		e.preventDefault();
 		e.stopPropagation();
 		if (!app.updateItemView) {
-
-			app.mainRouter.navigate("#share", {
+			app.mainRouter.navigate("#share/"+ app.user.get("user_id"), {
 				trigger: true,
 				replace: true
 			});
@@ -118,7 +116,7 @@ app.views.HomeView = Backbone.View.extend({
 	view_list_link : function(e){
 		e.preventDefault();
 		e.stopPropagation();
-		var link = "http://localhost/wishlist-app/#share"
+		var link = "localhost/wishlist-app/#share/" +  app.user.get("user_id");
 		$("#show-link").html(link).show();
 	},
 	logout: function () {

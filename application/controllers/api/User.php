@@ -204,7 +204,21 @@ class User extends REST_Controller
 			}
 		}
 	}
-
+	/**
+	 * Get user details
+	 * -------------------------
+	 * @method : GET
+	 * @url : api/user/{id}
+	 *
+	 */
+	public function single_user_get(){
+		$last = $this->uri->total_segments();
+		$user_id = $this->uri->segment($last);
+		$userData = $this->UserModel->getSingleUserData($user_id);
+		if(($userData != null) && !empty($userData)){
+			$this->response($userData);
+		}
+	}
 	public function logout_post()
 	{
 		$this->session->sess_destroy();

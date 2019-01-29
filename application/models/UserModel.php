@@ -47,6 +47,14 @@ class UserModel extends CI_Model
 		$this->db->update($this->user, $newStatus);
 	}
 
+	public function getSingleUserData($user_id){
+		$this->db->select("user_id,user_name,user_email,user_list_name,user_list_description");
+		$this->db->from($this->user);
+		$this->db->where("user_id", $user_id);
+		$query = $this->db->get();
+		return $query->row();
+	}
+
 	public function updateUser($user_list_name, $user_list_description,$user_id){
 		$updateData = array(
 			"user_list_name" => $user_list_name,

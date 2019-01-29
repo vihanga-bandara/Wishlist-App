@@ -2,6 +2,12 @@
 <html lang="en">
 <?php include("header.php"); ?>
 <style>
+	.nav-custom {
+		position: static;
+		width: 100%;
+		z-index: 10;
+		margin-top: -24px;
+	}
 	.container {
 		/*background-color: #9b59b6;*/
 		max-width: 100%;
@@ -318,6 +324,17 @@
 </style>
 
 <body>
+<!-- Start Navigation Bar-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark nav-custom" style="padding-bottom: 13px;">
+	<!--		<div class="container-fluid">-->
+	<div class="navbar-header">
+		<a class="navbar-brand" href="">My WishList</a>
+	</div>
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+	</div>
+</nav>
+<!-- End Navigation Bar-->
 
 <script type="text/template" class="login-temp" id="login-template">
 	<div class="wrapper" id="lig">
@@ -422,7 +439,10 @@
 	<div id="item_position">
 		<button id="btn-add-item" class="btn btn-success btn-xs pull-right" style="margin-left: 9px;">Add Item</button>
 		<button id="btn-share-list" class="btn btn-primary btn-xs pull-right">Go to Share List</button>
-		<button id="btn-view-list" class="btn btn-primary btn-xs pull-right">Get Share Link</button>
+		<button  id="btn-view-list" class="btn btn-primary btn-xs pull-right">Get Share Link</button>
+<!--		<button type="button" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="top" data-content="hi hihihi">-->
+<!--			Get Shared URL-->
+<!--		</button>-->
 		<button id="btn-logout" class="btn btn-danger btn-xs pull-right" style="text-align: right">Logout</button>
 		<label><span id="show-link" class="banda-style"></span></textarea></label>
 		<div class="row no-gutters tab-head">
@@ -445,6 +465,11 @@
 <script type="text/template" id="list-template-share">
 
 	<div id="placing">
+		<br>
+		<div style="text-align: center">
+			<h1><%=user_list_name%></h1>
+			<h2><%=user_list_description%></h2>
+		</div>
 		<button id="go-back" class="btn btn-primary">Go back</button>
 		<button id="btn-copy-link" class="btn btn-success">Copy Link to clipboard</button>
 		<span id="show_url"></span>
@@ -647,7 +672,7 @@
 
 <div class="container-add"></div>
 
-<div class="container-update" style="margin:-2%;"></div>
+<div class="container-update" style="margin:0%;"></div>
 
 <div class="container-share" style="margin: 5%;"></div>
 
