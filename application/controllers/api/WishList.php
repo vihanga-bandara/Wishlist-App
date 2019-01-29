@@ -82,8 +82,18 @@ class WishList extends REST_Controller
 				$data = $this->ItemModel->addItem($postData);
 				if (!empty($data) && ($data > 0))
 				{
+					$responseData = array(
+						"item_id" => $data,
+						"item_name" => $this->post("item_name", TRUE),
+						"item_url" => $this->post("item_url", TRUE),
+						"item_price" => $this->post("item_price", TRUE),
+						"item_description" => $this->post("item_description", TRUE),
+						"item_priority" => $this->post("item_priority", TRUE),
+					);
 					$message = array(
 						"id" => $data,
+						"item_id"=>$data,
+						"data" => $responseData,
 						"status" => true,
 						"message" => "Successfully added an item"
 					);
@@ -175,22 +185,22 @@ class WishList extends REST_Controller
 	 * @param: item_description
 	 * @param: item_priority
 	 * -------------------------
-	 * @method : POST
+	 * @method : PUT
 	 * @url : api/list/item/{item_id}
 	 */
-	public function item_post()
+	public function item_put()
 	{
-		if ($this->input->server("REQUEST_METHOD") == "POST")
+		if ($this->input->server("REQUEST_METHOD") == "PUT")
 		{
 
 			$last = $this->uri->total_segments();
 			$item_id = $this->uri->segment($last);
 
-			$item_name = $this->POST("item_name", TRUE);
-			$item_url = $this->POST("item_url", TRUE);
-			$item_price = $this->POST("item_price", TRUE);
-			$item_description = $this->POST("item_description", TRUE);
-			$item_priority = $this->POST("item_priority", TRUE);
+			$item_name = $this->put("item_name", TRUE);
+			$item_url = $this->put("item_url", TRUE);
+			$item_price = $this->put("item_price", TRUE);
+			$item_description = $this->put("item_description", TRUE);
+			$item_priority = $this->put("item_priority", TRUE);
 
 
 			$response = $this->ItemModel->updateItem($item_name, $item_url, $item_price, $item_description, $item_priority, $item_id);

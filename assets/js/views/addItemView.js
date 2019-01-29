@@ -1,31 +1,44 @@
 var app = app || {};
 
 app.views.addItemView = Backbone.View.extend({
-	el:".container-add",
-	render:function () {
+	el: ".container-add",
+	render: function () {
+		$(".container-main").hide();
+		$(".container-add").show();
 		template = _.template($('#add-item-template').html());
 		this.$el.append(template(this.model.attributes));
 
 	},
 	events: {
 		"click #js-btn-add": "add_item",
+		"click #js-btn-back": "go_back",
 	},
 	add_item: function (e) {
-	e.preventDefault();
-	e.stopPropagation();
-	var validateForm = validateAddForm();
-	if (!validateForm) {
-	} else {
-		this.model.set(validateForm);
-		var url = this.model.url;
-		this.model.save(this.model.attributes, {
-			"url": url,
-			success: function (model, response) {
-				alert("Item has been added");
-				app.appRouter.navigate("#list", {trigger: true, replace: true});
-			}
-		});
+		e.preventDefault();
+		e.stopPropagation();
+		var validateForm = Form_Adding_Item_Validation();
+		if (!validateForm) {} else {
+            this.model.clear();
+			this.model.set(validateForm);
+			var url = this.model.url;
+			this.model.save(this.model.attributes, {
+                "url": url,
+                wait: true,
+				success: function (model, response) {
+                    alert("Item has been added");
+                    app.viewHome.collection.add(model);
+                    app.viewHome.collection.sort();
+					app.mainRouter.navigate("#home", {
+						trigger: true,
+						replace: true
+					});
+				}
+			});
+		}
+    },
+	go_back: function (e) {
+		e.preventDefault();
+		e.stopPropagation();
+		app.mainRouter.navigate("#home", {trigger: true, replace: true});
 	}
-}
 });
-

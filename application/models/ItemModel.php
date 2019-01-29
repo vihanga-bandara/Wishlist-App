@@ -23,10 +23,27 @@ class ItemModel extends CI_Model
 	{
 		$this->db->select("*");
 		$this->db->where("user_id", $user_id);
+		// fetch the list according to priority
 		$this->db->order_by("item_priority", "asc");
 		$this->db->from($this->item_tbl_name);
 		$query = $this->db->get();
-		return $query->result();
+//		return $query->result();
+		$responeArr = Array();
+		foreach($query->result() as $row){
+			$arr = array(
+				"id"=>$row->item_id,
+				"item_id" => $row->item_id,
+				"item_name" => $row->item_name,
+				"item_price" => $row->item_price,
+				"item_description" => $row->item_description,
+				"item_url" => $row->item_url,
+				"item_priority" => $row->item_priority,
+				"item_image" => $row->item_image,
+			);
+			array_push($responeArr,$arr);
+		}
+		return $responeArr;
+
 	}
 
 	public function addItem($postData)

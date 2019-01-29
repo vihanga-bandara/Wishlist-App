@@ -41,15 +41,15 @@ class User extends REST_Controller
 		$_POST = $this->security->xss_clean($_POST);
 
 		//Validation
-		$this->form_validation->set_rules('name', 'Name of User', 'trim|required|is_unique[users_tbl.user_name]|alpha_numeric|max_length[20]',
+		$this->form_validation->set_rules('user_name', 'Name of User', 'trim|required|is_unique[users_tbl.user_name]|alpha_numeric|max_length[20]',
 			array('is_unique' => 'Username already exists. Please Enter a different Username')
 		);
-		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[users_tbl.user_email]|max_length[80]',
+		$this->form_validation->set_rules('user_email', 'Email', 'trim|required|valid_email|is_unique[users_tbl.user_email]|max_length[80]',
 			array('is_unique' => 'Email already exists, Please Enter a different Email')
 		);
-		$this->form_validation->set_rules('password', 'Password', 'trim|required|max_length[80]');
-		$this->form_validation->set_rules('listName', 'List Name', 'trim|required|max_length[80]');
-		$this->form_validation->set_rules('listDescription', 'List Description', 'trim|required|max_length[150]');
+		$this->form_validation->set_rules('user_password', 'Password', 'trim|required|max_length[80]');
+		$this->form_validation->set_rules('user_list_name', 'List Name', 'trim|max_length[80]');
+		$this->form_validation->set_rules('user_list_description', 'List Description', 'trim|max_length[150]');
 
 		if ($this->form_validation->run() == FALSE)
 		{
@@ -62,11 +62,11 @@ class User extends REST_Controller
 		} else
 		{
 			$register_data = array(
-				"user_name" => $this->post("name", TRUE),
-				"user_email" => $this->post("email", TRUE),
-				"user_password" => hash("sha256", $this->input->post("password", TRUE)),
-				"user_list_name" => $this->post("listName", TRUE),
-				"user_list_description" => $this->post("listDescription", TRUE),
+				"user_name" => $this->post("user_name", TRUE),
+				"user_email" => $this->post("user_email", TRUE),
+				"user_password" => hash("sha256", $this->input->post("user_password", TRUE)),
+				"user_list_name" => $this->post("user_list_name", TRUE),
+				"user_list_description" => $this->post("user_list_description", TRUE),
 			);
 			$data = $this->UserModel->registerUser($register_data);
 			if (!empty($data) && ($data > 0))
@@ -136,9 +136,11 @@ class User extends REST_Controller
 				);
 				$message = array(
 					"id"=> $login_data->user_id,
+					"user_id" => $login_data->user_id,
+					"user_list_name" => $login_data->user_list_name,
+					"user_list_description" =>$login_data->user_list_description,
 					"status" => true,
 					"data" => $loginData,
-					"user_id" => $login_data->user_id,
 					"message" => "User successfully logged in"
 				);
 				$this->session->set_userdata($loginData);
@@ -156,6 +158,51 @@ class User extends REST_Controller
 			}
 		}
 
+	}
+
+
+	/**
+	 * Create new list
+	 * -------------------------
+	 * @param: user_list_name
+	 * @param: user_list_description
+	 * -------------------------
+	 * @method : PUT
+	 * @url : api/user/update
+	 */
+	public function create_list_put()
+	{
+		if ($this->input->server("REQUEST_METHOD") == "PUT")
+		{
+			$last = $this->uri->total_segments();
+			$user_id = $this->uri->segment($last);
+
+			$user_list_name = $this->put("user_list_name", TRUE);
+			$user_list_description = $this->put("user_list_description", TRUE);
+
+			$response = $this->UserModel->updateUser($user_list_name, $user_list_description,$user_id);
+			if ($response)
+			{
+				$responseData = array(
+					"user_list_name" => $user_list_name,
+					"user_list_description" => $user_list_description,
+				);
+				$message = array(
+					"status" => true,
+					"data" => $responseData,
+					"message" => "Your List has been created"
+				);
+				$this->response($message, REST_Controller::HTTP_OK);
+			} else
+			{
+				$message = array(
+					"status" => false,
+					"error" => $this->form_validation->error_array(),
+					"message" => "Error when creating list"
+				);
+				$this->response($message, REST_Controller::HTTP_BAD_REQUEST);
+			}
+		}
 	}
 
 	public function logout_post()

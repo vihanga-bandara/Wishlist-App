@@ -6,15 +6,27 @@ app.views.shareListView = Backbone.View.extend({
 	render: function () {
 		template = _.template($('#list-template-share').html());
 		this.$el.html(template);
+		$(".container-share").show();
 		this.collection.each(function (item) {
-			var ItemView = new app.views.ItemsViewShare({model: item});
+			var ItemView = new app.views.ItemViewShare({model: item});
 			ItemView.render();
 		});
 	},
 	events: {
-		"click #go-back": "go_back_list",
+        "click #btn-copy-link": "copylink",
+		"click #go-back": "go_back",
 	},
-	go_back_item: function (e) {
-		app.appRouter.navigate("#list", {trigger: true, replace: true});
-	}
+	go_back: function (e) {
+        e.preventDefault();
+		e.stopPropagation();
+		app.mainRouter.navigate("#home", {trigger: true, replace: true});
+    },
+    copylink: function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        var url = window.location.href;
+        $("#show_url").html(url).show();
+        console.log($('#show_url').select().html());
+        document.execCommand('copy');
+    }
 });

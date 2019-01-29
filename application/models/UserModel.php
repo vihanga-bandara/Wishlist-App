@@ -47,7 +47,24 @@ class UserModel extends CI_Model
 		$this->db->update($this->user, $newStatus);
 	}
 
+	public function updateUser($user_list_name, $user_list_description,$user_id){
+		$updateData = array(
+			"user_list_name" => $user_list_name,
+			"user_list_description" => $user_list_description
+		);
+		$this->db->where("user_id", $user_id);
+		$this->db->update($this->user, $updateData);
+		$updated_status = $this->db->affected_rows();
+		if($updated_status)
+		{
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 // public function logoutUser(){
-//
+// 	session_unset();
 // }
 }

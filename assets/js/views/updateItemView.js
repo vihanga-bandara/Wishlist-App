@@ -9,27 +9,31 @@ app.views.updateItemView = Backbone.View.extend({
 	},
 	events: {
 		"click #js-btn-add": "update_item",
-		"click #go-back": "go_back_item",
+		"click #go-back": "go_back",
 	},
 	update_item: function (e) {
 		e.preventDefault();
 		e.stopPropagation();
-		var validateForm = validateAddForm();
+		var validateForm = Form_Updating_Item_Validation();
 		if (!validateForm) {
 		} else {
 			this.model.set(validateForm);
 			var url = this.model.url + this.model.get("item_id");
 			this.model.save(this.model.attributes, {
+                patch: false,
 				"url": url,
 				success: function (model, response) {
 					alert("Item has been updated");
-					app.appRouter.navigate("#list", {trigger: true, replace: true});
-				}
+					app.mainRouter.navigate("#home", {trigger: true, replace: true});
+                },
+                error: function(){
+                    console.log("error");
+                }
 			});
 		}
 	},
-	go_back_item: function (e) {
-		app.appRouter.navigate("#list", {trigger: true, replace: true});
+	go_back: function (e) {
+		app.mainRouter.navigate("#home", {trigger: true, replace: true});
 	}
 });
 

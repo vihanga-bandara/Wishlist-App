@@ -1,8 +1,7 @@
-<html>
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="description" content="WishList App">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
@@ -21,24 +20,28 @@
 			crossorigin="anonymous">
 	</script>
 
-	<script src="<?php echo base_url(); ?>assets/js/app.js"></script>
-	<script src="<?php echo base_url(); ?>assets/js/models/user.js"></script>
-	<script src="<?php echo base_url(); ?>assets/js/models/listItem.js"></script>
-	<script src="<?php echo base_url(); ?>assets/js/views/loginFormView.js"></script>
-	<script src="<?php echo base_url(); ?>assets/js/views/listView.js"></script>
+<!-- ImportModels -->
+	<script src="<?php echo base_url(); ?>assets/js/main/main.js"></script>
+	<script src="<?php echo base_url(); ?>assets/js/models/itemmodel.js"></script>
+	<script src="<?php echo base_url(); ?>assets/js/models/usermodel.js"></script>.
+	<script src="<?php echo base_url(); ?>assets/js/models/collectionmodel.js"></script>
+
+<!-- Import Views -->
+	<script src="<?php echo base_url(); ?>assets/js/views/loginView.js"></script>
+	<script src="<?php echo base_url(); ?>assets/js/views/homeView.js"></script>
 	<script src="<?php echo base_url(); ?>assets/js/views/itemView.js"></script>
 	<script src="<?php echo base_url(); ?>assets/js/views/addItemView.js"></script>
-	<script src="<?php echo base_url(); ?>assets/js/views/updateItemView.js"></script>
-	<script src="<?php echo base_url(); ?>assets/js/views/shareListView.js"></script>
 	<script src="<?php echo base_url(); ?>assets/js/views/itemViewShare.js"></script>
-	<script src="<?php echo base_url(); ?>assets/js/routers/approuter.js"></script>
+	<script src="<?php echo base_url(); ?>assets/js/views/shareListView.js"></script>
+	<script src="<?php echo base_url(); ?>assets/js/views/updateItemView.js"></script>
+	<script src="<?php echo base_url(); ?>assets/js/views/createListView.js"></script>
 
+<!-- Import Routers -->
+	<script src="<?php echo base_url(); ?>assets/js/routers/router.js"></script>
 
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 		  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 		  crossorigin="anonymous">
 
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-	<link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css"
-		  integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
 </head>

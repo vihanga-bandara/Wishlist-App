@@ -1,6 +1,6 @@
 var app = app || {};
 
-app.views.ItemsViewShare = Backbone.View.extend({
+app.views.ItemViewShare = Backbone.View.extend({
 
 	el:"#placing",
 	render:function () {
