@@ -7,11 +7,7 @@ app.views.HomeView = Backbone.View.extend({
 		console.log("rendering");
 		template = _.template($('#list-template').html());
 		this.$el.html(template(app.user.attributes));
-		$(".container").hide();
-		$(".container-create-list").hide();
-		$(".container-add").hide();
-		$(".container-share").hide();
-		$(".container-update").hide();
+		hideElement();
 		$(".container-main").show();
 		if (empty) {
 			$("#no-items").show();

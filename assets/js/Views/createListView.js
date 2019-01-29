@@ -4,7 +4,8 @@ app.views.CreateListView = Backbone.View.extend({
 	el: ".container-create-list",
 	render: function () {
 		//get html content of 'create-list-template'
-		$(".container").hide("");
+		hideElement();
+		$(".container-create-list").show();
 		template = _.template($('#create-list-template').html());
 		this.$el.html(template);
 	}

@@ -6,6 +6,8 @@ app.views.LoginView = Backbone.View.extend({
 		//get html content of 'login-template'
 		template = _.template($('#login-template').html());
 		this.$el.html(template);
+		hideElement();
+		$(".container").show();
 	},
 	events: {
 		"click #js-btn": "login",

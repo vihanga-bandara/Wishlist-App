@@ -12,38 +12,47 @@ app.routers.MainRouter = Backbone.Router.extend({
 		// "share": "shareList",
 	},
 	login: function (e) {
-		app.user = new app.models.User();
-		app.loginDisplay = new app.views.LoginView({
-			model: app.user
-		});
-		app.loginDisplay.render();
+		userJson = JSON.parse(localStorage.getItem("UserJson"));
+		if (userJson == null) {
+			app.user = new app.models.User();
+			app.loginDisplay = new app.views.LoginView({
+				model: app.user
+			});
+			app.loginDisplay.render();
+		} else {
+			this.viewHome();
+		}
 	},
 	viewHome: function () {
-		//creation of collection
-		app.viewHome = new app.views.HomeView({collection: new app.collections.ItemCollection()});
-		var url = app.viewHome.collection.url;
-		app.viewHome.collection.fetch({
-			reset: true,
-			"url": url,
-			wait: true,
-			success: function (collection, response) {
-				console.log(response);
-				if (app.user.attributes.user_list_name == "") {
-					app.mainRouter.navigate("#create", {
-						trigger: true,
-						replace: true
-					});
-				} else {
-					app.viewHome.collection.sort();
-					app.viewHome.render(false);
+		userJson = JSON.parse(localStorage.getItem("UserJson"));
+		if (userJson != null) {
+			//creation of collection
+			app.viewHome = new app.views.HomeView({collection: new app.collections.ItemCollection()});
+			var url = app.viewHome.collection.url;
+			app.viewHome.collection.fetch({
+				reset: true,
+				"url": url,
+				wait: true,
+				success: function (collection, response) {
+					console.log(response);
+					if (app.user.attributes.user_list_name == "") {
+						app.mainRouter.navigate("#create", {
+							trigger: true,
+							replace: true
+						});
+					} else {
+						app.viewHome.collection.sort();
+						app.viewHome.render(false);
+					}
+				},
+				error: function (collection, xhr, options) {
+					if (xhr.status == 404) {
+						app.listView.render(true);
+					}
 				}
-			},
-			error: function (collection, xhr, options) {
-				if (xhr.status == 404) {
-					app.listView.render(true);
-				}
-			}
-		});
+			});
+		}
+
 	},
 	createList: function (e) {
 		app.createListView = new app.views.CreateListView({model: app.user});
@@ -82,27 +91,33 @@ app.routers.MainRouter = Backbone.Router.extend({
 		}
 	},
 	sharedLink: function (id) {
-		var getUserUrl = app.user.url + id;
-		app.shareListView = new app.views.shareListView(
-			{collection: new app.collections.ItemCollection(), model: new app.models.User()});
-		app.shareListView.model.fetch({
-			reset: true,
-			"url": getUserUrl,
-			wait: true,
-			success: function (model, response) {
-				console.log(response);
-			}
-		});
+		UserJson = JSON.parse(localStorage.getItem("UserJson"));
+		if (UserJson != null && app.user.get("user_id") == null) {
+			app.user = UserJson;
+			var getUserUrl = "/wishlist-app/api/user/" + id;
+			app.shareListView = new app.views.shareListView(
+				{collection: new app.collections.ItemCollection(), model: new app.models.User()});
+			app.shareListView.model.fetch({
+				reset: true,
+				"url": getUserUrl,
+				wait: true,
+				success: function (model, response) {
+					console.log(response);
+				}
+			});
 
-		var url = app.shareListView.collection.url + id;
-		app.shareListView.collection.fetch({
-			reset: true,
-			"url": url,
-			wait: true,
-			success: function (collection, response) {
-				app.shareListView.render();
-			}
-		});
+			var url = app.shareListView.collection.url + id;
+			app.shareListView.collection.fetch({
+				reset: true,
+				"url": url,
+				wait: true,
+				success: function (collection, response) {
+					app.shareListView.render();
+				}
+			});
+		} else {
+			this.login();
+		}
 	}
 });
 
@@ -113,4 +128,13 @@ function cleanHTML() {
 	$(".container-main").html("");
 	$(".container-share").html("");
 	$(".container-create-list").html("");
+}
+
+function hideElement() {
+	$(".container").hide();
+	$(".container-create-list").hide();
+	$(".container-add").hide();
+	$(".container-share").hide();
+	$(".container-update").hide();
+	$(".container-main").hide();
 }
