@@ -441,14 +441,29 @@
 </script>
 
 <script type="text/template" id="list-template-share">
-	<button id="go-back" class="btn btn-primary">Go back</button>
-	<button id="btn-copy-link" class="btn btn-success">Copy Link to clipboard</button>
-	<span id="show_url"></span>
-	<div class="row">
-		<div id="placing">
 
+	<br>
+	<div style="text-align: center">
+		<h1><%=user_list_name%></h1>
+		<h2><%=user_list_description%></h2>
+	</div>
+	<h1 id="#no-items"></h1>
+	<div id="placing">
+		<button id="go-back" class="btn btn-primary">Go back</button>
+		<button id="btn-copy-link" class="btn btn-success">Copy Link to clipboard</button>
+		<span id="show_url"></span>
+
+		<div class="row no-gutters tab-head">
+			<div class="col-md-12">
+				<div class="row no-gutters">
+					<div class="col-md-1 pad-give">ID</div>
+					<div class="col-md-2 pad-give">Name</div>
+					<div class="col-md-1 pad-give">price</div>
+					<div class="col-md-3 pad-give">Url</div>
+					<div class="col-md-2 pad-give">Item Priority</div>
+				</div>
+			</div>
 		</div>
-
 	</div>
 
 </script>
@@ -471,7 +486,7 @@
 				</div>
 
 				<div class="form-group">
-					<label for='ItemPrice'> Price of Item </label>
+					<label for='ItemPrice'> Price of Item (LKR) </label>
 					<input type='number' class='form-control text-left' name='item_price' id='item_price'/>
 				</div>
 
@@ -484,8 +499,7 @@
 				<div class="form-group">
 					<label for='ItemPriority'> Priority of Item </label>
 					<select class='form-control text-left' id="item_priority">
-						<option selected="selected">Select Priority</option>
-						<option value="1">Must Have</option>
+						<option selected="selected" value="1">Must Have</option>
 						<option value="2">Would be Nice to Have</option>
 						<option value="3">If You Can</option>
 					</select>
@@ -514,22 +528,21 @@
 		<div class="col-md-6 offset-md-3 banda-cust">
 			<form>
 				<div class="form-group">
-					<label for='ItemName'>Item Id : <%=item_id%></label>
-				</div>
-				<div class="form-group">
-					<label for='ItemName'> Name of Item </label>
+					<label for='ItemName'><h1>Update an Item</h1></label> <br>
+					<label for='ItemName'>Item Id : <%=item_id%></label> <br><br>
+					<label for='ItemName'> Name of Item </label> <br>
 					<input type='text' class='form-control text-left' value="<%=item_name%>" name='item_name'
 						   id='item_name'/>
 				</div>
 
 				<div class="form-group">
-					<label for='ItemUrl'> URL of Item </label>
+					<label for='ItemUrl'> URL of Item </label> <br>
 					<input type='text' class='form-control text-left' value="<%=item_url%>" name='item_url'
 						   id='item_url'/>
 				</div>
 
 				<div class="form-group">
-					<label for='ItemPrice'> Price of Item </label>
+					<label for='ItemPrice'> Price of Item (LKR) </label>
 					<input type='number' class='form-control text-left' value="<%=item_price%>" name='item_price'
 						   id='item_price'/>
 				</div>
@@ -541,7 +554,12 @@
 				</div>
 
 				<div class="form-group">
-					<label for='Selected Value'>Priority of Item : <%=item_priority%></label><br>
+					<label for='Selected Value'>Previous Priority of Item : <%if(item_priority =='1'){%>
+						Must Have
+						<%}else if(item_priority =='2'){%>
+						Would be Nice to Have
+						<%}else{%>
+						Not needed<%}%></label><br><br>
 					<label for='ItemPriority'> Select Priority </label>
 
 					<select class='form-control text-left' id="item_priority">
@@ -562,7 +580,6 @@
 </script>
 
 <script type="text/template" id="item-template">
-
 	<div class="row mar">
 		<div class="col-md-12 custyle">
 
@@ -594,31 +611,21 @@
 </script>
 
 <script type="text/template" id="item-template-share">
-	<div class="row">
-		<div class="col-md-8 offset-md-2">
-			<table class="table table-striped" style="table-layout:fixed; width:100%;">
-				<thead>
-				<tr>
-					<th>Item Id</th>
-					<th>Item Name</th>
-					<th>Item Price</th>
-					<th>Item Description</th>
-					<th>Item Priority</th>
-					<th>#</th>
-				</tr>
-				</thead>
-				<tbody>
-				<tr>
-					<td><%=item_id%></td>
-					<td><%=item_name%></td>
-					<td><%=item_price%></td>
-					<td><%=item_description%></td>
-					<td><%=item_priority%></td>
-					<td><a href="<%=item_url%>" class="card-link">View</a></td>
-
-				</tr>
-				</tbody>
-			</table>
+	<div class="row mar">
+		<div class="col-md-12 custyle">
+			<div class="row no-gutters">
+				<div class="col-md-1 pad-give"><%=item_id%></div>
+				<div class="col-md-2 pad-give"><%=item_name%></div>
+				<div class="col-md-1 pad-give">Rs.<%=item_price%></div>
+				<div class="col-md-3 pad-give show-url"><a href="<%=item_url%>" target="_blank"><%=item_url%></a></div>
+				<div class="col-md-2 pad-give"><%if(item_priority =='1'){%>
+					Must Have
+					<%}else if(item_priority =='2'){%>
+					Would be Nice to Have
+					<%}else{%>
+					Not needed<%}%>
+				</div>
+			</div>
 		</div>
 	</div>
 </script>
@@ -631,9 +638,9 @@
 
 <div class="container-add"></div>
 
-<div class="container-update"></div>
+<div class="container-update" style="margin:-2%;"></div>
 
-<div class="container-share"></div>
+<div class="container-share" style="margin: 5%;"></div>
 
 
 </body>

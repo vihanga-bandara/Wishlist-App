@@ -33,6 +33,7 @@ app.routers.MainRouter = Backbone.Router.extend({
 						replace: true
 					});
 				} else {
+					app.viewHome.collection.sort();
 					app.viewHome.render(false);
 				}
 			},

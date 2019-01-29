@@ -17,25 +17,27 @@ app.views.addItemView = Backbone.View.extend({
 		e.preventDefault();
 		e.stopPropagation();
 		var validateForm = Form_Adding_Item_Validation();
-		if (!validateForm) {} else {
-            this.model.clear();
+		if (typeof (validateForm) == "object") {
+			this.model.clear();
 			this.model.set(validateForm);
 			var url = this.model.url;
 			this.model.save(this.model.attributes, {
-                "url": url,
-                wait: true,
+				"url": url,
+				wait: true,
 				success: function (model, response) {
-                    alert("Item has been added");
-                    app.viewHome.collection.add(model);
-                    app.viewHome.collection.sort();
+					notify(model.get("item_name") + " has been added");
+					app.viewHome.collection.add(model);
+					app.viewHome.collection.sort();
 					app.mainRouter.navigate("#home", {
 						trigger: true,
 						replace: true
 					});
 				}
 			});
+		} else {
+			notify(validateForm);
 		}
-    },
+	},
 	go_back: function (e) {
 		e.preventDefault();
 		e.stopPropagation();

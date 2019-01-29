@@ -58,7 +58,7 @@ function Form_Create_List_Validation() {
 	};
 	var message = "";
 	if (!listDetails.user_list_name) {
-		message = "Please enter a list name";
+		message = "Please enter an list name";
 		return message;
 	} else if (!listDetails.user_list_description) {
 		message = "Please enter a list description";
@@ -67,6 +67,15 @@ function Form_Create_List_Validation() {
 		return listDetails;
 	}
 }
+
+function notify(message) {
+	notif({
+		msg: message,
+		type: "success",
+		position: "center"
+	});
+}
+
 
 function Form_Adding_Item_Validation() {
 	var item = {

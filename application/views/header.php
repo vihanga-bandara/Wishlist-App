@@ -19,8 +19,10 @@
 			integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
 			crossorigin="anonymous">
 	</script>
+	<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/notifIt.js"></script>
 
-<!-- ImportModels -->
+
+	<!-- ImportModels -->
 	<script src="<?php echo base_url(); ?>assets/js/main/main.js"></script>
 	<script src="<?php echo base_url(); ?>assets/js/models/itemmodel.js"></script>
 	<script src="<?php echo base_url(); ?>assets/js/models/usermodel.js"></script>.
@@ -44,4 +46,5 @@
 		  crossorigin="anonymous">
 
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/notifIt.css">
 </head>
