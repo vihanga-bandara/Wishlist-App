@@ -76,7 +76,24 @@ function Form_Adding_Item_Validation() {
 		'item_description': $("#item_description").val(),
 		'item_priority': $("#item_priority").val(),
 	};
-	return item;
+	var message = "";
+	if (!item.item_name) {
+		message = "Please enter a item name";
+		$("#item_name").prop("required",true);
+		return message;
+	} else if (!item.item_url) {
+		message = "Please enter a url";
+		$("#item_url").prop("required",true);
+		return message;
+	} else if (!item.item_price) {
+		message = "Please enter a price";
+		return message;
+	}else if (!item.item_priority) {
+		message = "Please enter your priority";
+		return message;
+	}else {
+		return item;
+	}
 }
 
 function Form_Updating_Item_Validation() {
@@ -87,7 +104,24 @@ function Form_Updating_Item_Validation() {
 		'item_description': $("#item_description").val(),
 		'item_priority': $("#item_priority").val(),
 	};
-	return item;
+	var message="";
+	if (!item.item_name) {
+		message = "Fields cannot be empty when making changes";
+		$("#item_name").prop("required",true);
+		return message;
+	} else if (!item.item_url) {
+		message = "Fields cannot be empty when making changes";
+		$("#item_url").prop("required",true);
+		return message;
+	} else if (!item.item_price) {
+		message = "Fields cannot be empty when making changes";
+		return message;
+	}else if (!item.item_priority) {
+		message = "Fields cannot be empty when making changes";
+		return message;
+	}else {
+		return item;
+	}
 }
 
 $(document).ready(function () {
