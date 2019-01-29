@@ -42,6 +42,7 @@ app.views.HomeView = Backbone.View.extend({
 		"click #btn-update-item": "update_item",
 		"click #btn-delete-item": "delete_item",
 		"click #btn-share-list": "share_list",
+		"click #btn-view-list": "view_list_link",
 		"click #btn-logout": "logout",
 	},
 	add_item: function (e) {
@@ -93,9 +94,7 @@ app.views.HomeView = Backbone.View.extend({
 			success: function (model, response) {
 				app.viewHome.collection.remove(newVal);
 				app.viewHome.render();
-			},
-			error: function () {
-				console.log("not deleted and error");
+				notify(model.get("item_name") + " has been deleted");
 			}
 		})
 	},
@@ -116,8 +115,13 @@ app.views.HomeView = Backbone.View.extend({
 		}
 
 	},
+	view_list_link : function(e){
+		e.preventDefault();
+		e.stopPropagation();
+		var link = "http://localhost/wishlist-app/#share"
+		$("#show-link").html(link).show();
+	},
 	logout: function () {
-		cleanHTML();
 		window.location.href = "http://localhost/wishlist-app/";
 	}
 });

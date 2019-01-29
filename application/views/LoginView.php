@@ -424,7 +424,7 @@
 		<button id="btn-share-list" class="btn btn-primary btn-xs pull-right">Go to Share List</button>
 		<button id="btn-view-list" class="btn btn-primary btn-xs pull-right">Get Share Link</button>
 		<button id="btn-logout" class="btn btn-danger btn-xs pull-right" style="text-align: right">Logout</button>
-
+		<label><span id="show-link" class="banda-style"></span></textarea></label>
 		<div class="row no-gutters tab-head">
 			<div class="col-md-12">
 				<div class="row no-gutters">

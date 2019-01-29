@@ -32,6 +32,9 @@ app.views.addItemView = Backbone.View.extend({
 						trigger: true,
 						replace: true
 					});
+				},
+				error: function () {
+					notify("Error updating, please try again later.");
 				}
 			});
 		} else {
