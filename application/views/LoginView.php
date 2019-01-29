@@ -10,18 +10,19 @@
 		margin-top: -24px;
 		height: 100%;
 	}
-	.banda-style{
+
+	.banda-style {
 		border: 1px solid #ccc;
 	}
 
 	/*.banda-cust .form-control {*/
-		/*height: 38px;*/
-		/*font-size: 15px;*/
+	/*height: 38px;*/
+	/*font-size: 15px;*/
 	/*}*/
 
 	/*.banda-cust label {*/
-		/*margin-bottom: 0 !important;*/
-		/*font-size: 13px;*/
+	/*margin-bottom: 0 !important;*/
+	/*font-size: 13px;*/
 	/*}*/
 
 	body {
@@ -390,19 +391,19 @@
 			<div class="tab-content" id="myTabContent">
 				<div class="tab-pane fade show active" id="user-login-form" role="tabpanel" aria-labelledby="home-tab">
 
-						<div class="fadeIn first">
-							<h1 style="margin: 15px 0; font-size: 25px;">Create your List</h1>
-						</div>
-						<!-- Login Form -->
-						<form>
-							<input type="text" id="create-list-name" placeholder="Enter list name">
-							<input type="text" id="create-list-desc" placeholder="Enter list description">
-							<input type="submit" class="fadeIn fourth loginButton" id="create-list-btn" value="Create">
-						</form>
-						<!-- Remind Passowrd -->
-						<div id="formFooter">
-							<span id="createListErrorsTab" style="color:red;font-size: small;"></span>
-						</div>
+					<div class="fadeIn first">
+						<h1 style="margin: 15px 0; font-size: 25px;">Create your List</h1>
+					</div>
+					<!-- Login Form -->
+					<form>
+						<input type="text" id="create-list-name" placeholder="Enter list name">
+						<input type="text" id="create-list-desc" placeholder="Enter list description">
+						<input type="submit" class="fadeIn fourth loginButton" id="create-list-btn" value="Create">
+					</form>
+					<!-- Remind Passowrd -->
+					<div id="formFooter">
+						<span id="createListErrorsTab" style="color:red;font-size: small;"></span>
+					</div>
 
 				</div>
 			</div>
@@ -420,7 +421,8 @@
 	<h1 id="#no-items"></h1>
 	<div id="item_position">
 		<button id="btn-add-item" class="btn btn-success btn-xs pull-right" style="margin-left: 9px;">Add Item</button>
-		<button id="btn-share-list" class="btn btn-primary btn-xs pull-right">Share List</button>
+		<button id="btn-share-list" class="btn btn-primary btn-xs pull-right">Go to Share List</button>
+		<button id="btn-view-list" class="btn btn-primary btn-xs pull-right">Get Share Link</button>
 		<button id="btn-logout" class="btn btn-danger btn-xs pull-right" style="text-align: right">Logout</button>
 
 		<div class="row no-gutters tab-head">
@@ -442,12 +444,6 @@
 
 <script type="text/template" id="list-template-share">
 
-	<br>
-	<div style="text-align: center">
-		<h1><%=user_list_name%></h1>
-		<h2><%=user_list_description%></h2>
-	</div>
-	<h1 id="#no-items"></h1>
 	<div id="placing">
 		<button id="go-back" class="btn btn-primary">Go back</button>
 		<button id="btn-copy-link" class="btn btn-success">Copy Link to clipboard</button>
@@ -473,7 +469,7 @@
 		<div class="col-md-6 offset-md-3 banda-cust">
 			<form>
 				<div class="form-group">
-					<label for='ItemName'> <h1>Add an Item</h1> </label> <br>
+					<label for='ItemName'><h1>Add an Item</h1></label> <br>
 				</div>
 				<div class="form-group">
 					<label for='ItemName'> Name of Item </label> <br>
@@ -509,11 +505,13 @@
 						<div class="row">
 							<div class="col-md-6">
 								<button id="js-btn-add" class='form-control btn btn-primary' value="add item">Add
-									Item</button>
+									Item
+								</button>
 							</div>
 							<div class="col-md-6">
 								<button id="js-btn-back" class='form-control btn btn-primary' value="go back">Go
-									Back</button>
+									Back
+								</button>
 							</div>
 						</div>
 					</div>
@@ -554,16 +552,23 @@
 				</div>
 
 				<div class="form-group">
+					<br>
 					<label for='Selected Value'>Previous Priority of Item : <%if(item_priority =='1'){%>
 						Must Have
 						<%}else if(item_priority =='2'){%>
 						Would be Nice to Have
 						<%}else{%>
-						Not needed<%}%></label><br><br>
+						Not needed<%}%></label><br>
 					<label for='ItemPriority'> Select Priority </label>
 
 					<select class='form-control text-left' id="item_priority">
-						<option selected="selected">Select Priority</option>
+						<option selected="selected" value="<%=item_priority%>"><%if(item_priority =='1'){%>
+							Must Have
+							<%}else if(item_priority =='2'){%>
+							Would be Nice to Have
+							<%}else{%>
+							Not needed<%}%>
+						</option>
 						<option value="1">Must Have</option>
 						<option value="2">Would be Nice to Have</option>
 						<option value="3">If You Can</option>
@@ -595,10 +600,14 @@
 					<%}else{%>
 					Not needed<%}%>
 				</div>
-				<div class="col-md-2 pad-give text-right"><button class='btn btn-info btn-xs' value="<%=item_id%>" id="btn-update-item">
-						<span class="glyphicon glyphicon-edit"></span> Edit</button>
+				<div class="col-md-2 pad-give text-right">
+					<button class='btn btn-info btn-xs' value="<%=item_id%>" id="btn-update-item">
+						<span class="glyphicon glyphicon-edit"></span> Edit
+					</button>
 					<button class="btn btn-danger btn-xs" value="<%=item_id%>" id="btn-delete-item">
-						<span class="glyphicon glyphicon-remove "></span> Delete</button></div>
+						<span class="glyphicon glyphicon-remove "></span> Delete
+					</button>
+				</div>
 
 			</div>
 		</div>

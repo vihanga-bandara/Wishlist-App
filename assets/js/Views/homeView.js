@@ -13,9 +13,9 @@ app.views.HomeView = Backbone.View.extend({
 		$(".container-share").hide();
 		$(".container-update").hide();
 		$(".container-main").show();
-		if(empty){
+		if (empty) {
 			$("#no-items").show();
-		}else {
+		} else {
 			$("#no-items").hide();
 		}
 		this.collection.each(function (item) {
@@ -24,19 +24,19 @@ app.views.HomeView = Backbone.View.extend({
 			});
 			itemView.render();
 		});
-    },
-    initialize: function(){
-        // if(app.viewHome){
-        //     this.listenTo(app.viewHome.collection, 'add', this.onItemAdded);
-        //     this.listenTo(app.viewHome.collection, 'remove', this.onItemDeleted);
-        // }
-    },
-    onItemAdded: function(){
-        alert("Item added");
-    },
-    onItemDeleted: function(){
-        alert("Item deleted");
-    },
+	},
+	initialize: function () {
+		// if(app.viewHome){
+		//     this.listenTo(app.viewHome.collection, 'add', this.onItemAdded);
+		//     this.listenTo(app.viewHome.collection, 'remove', this.onItemDeleted);
+		// }
+	},
+	onItemAdded: function () {
+		alert("Item added");
+	},
+	onItemDeleted: function () {
+		alert("Item deleted");
+	},
 	events: {
 		"click #btn-add-item": "add_item",
 		"click #btn-update-item": "update_item",
@@ -85,16 +85,16 @@ app.views.HomeView = Backbone.View.extend({
 		var id = $(e.currentTarget).val();
 		var newVal = existing_arr.find(function (el) {
 			return el.attributes.item_id == id;
-        });       
-        var url = newVal.url + id;
+		});
+		var url = newVal.url + id;
 		newVal.destroy({
-            url:url,
-            wait: true,
+			url: url,
+			wait: true,
 			success: function (model, response) {
-                app.viewHome.collection.remove(newVal);
-                app.viewHome.render();
-            },
-            error: function() {
+				app.viewHome.collection.remove(newVal);
+				app.viewHome.render();
+			},
+			error: function () {
 				console.log("not deleted and error");
 			}
 		})
@@ -117,7 +117,7 @@ app.views.HomeView = Backbone.View.extend({
 
 	},
 	logout: function () {
-        cleanHTML();		
-        window.location.href = "http://localhost/wishlist-app/";
+		cleanHTML();
+		window.location.href = "http://localhost/wishlist-app/";
 	}
 });

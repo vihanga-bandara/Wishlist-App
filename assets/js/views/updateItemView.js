@@ -1,10 +1,11 @@
 var app = app || {};
 
 app.views.updateItemView = Backbone.View.extend({
-	el:".container-update",
+	el: ".container-update",
 	render: function () {
 		template = _.template($('#update-item-template').html());
-		$(".container").html("");
+		$(".container-main").hide();
+		$(".container-update").show();
 		this.$el.append(template(this.model.attributes));
 	},
 	events: {
@@ -15,24 +16,36 @@ app.views.updateItemView = Backbone.View.extend({
 		e.preventDefault();
 		e.stopPropagation();
 		var validateForm = Form_Updating_Item_Validation();
-		if (!validateForm) {
-		} else {
+		if (typeof (validateForm) == "object") {
 			this.model.set(validateForm);
 			var url = this.model.url + this.model.get("item_id");
 			this.model.save(this.model.attributes, {
-                patch: false,
+				patch: false,
 				"url": url,
 				success: function (model, response) {
-					alert("Item has been updated");
-					app.mainRouter.navigate("#home", {trigger: true, replace: true});
-                },
-                error: function(){
-                    console.log("error");
-                }
+					app.mainRouter.navigate("#home", {
+							trigger: true,
+							replace: true
+						}
+					);
+					notify(model.get("item_name") + " has been updated");
+					app.viewHome.collection.sort();
+					app.mainRouter.navigate("#home", {
+						trigger: true,
+						replace: true
+					});
+				},
+				error: function () {
+					notify("Error updating, please try again later.");
+				}
 			});
+		} else {
+			notify(validateForm);
 		}
 	},
 	go_back: function (e) {
+		e.preventDefault();
+		e.stopPropagation();
 		app.mainRouter.navigate("#home", {trigger: true, replace: true});
 	}
 });

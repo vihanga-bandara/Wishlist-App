@@ -3,14 +3,14 @@ var app = app || {};
 app.routers.MainRouter = Backbone.Router.extend({
 	routes: {
 		"": "login",
-		"create":"createList",
+		"create": "createList",
 		"home": "viewHome",
 		"home/add": "addList",
 		"home/update/:id": "updateList",
 		"home/delete": "deleteList",
 		"share": "shareList",
 	},
-	login: function () {
+	login: function (e) {
 		app.user = new app.models.User();
 		app.loginDisplay = new app.views.LoginView({
 			model: app.user
@@ -25,9 +25,9 @@ app.routers.MainRouter = Backbone.Router.extend({
 			reset: true,
 			"url": url,
 			wait: true,
-			success: function(collection, response) {
+			success: function (collection, response) {
 				console.log(response);
-				if(app.user.attributes.user_list_name == ""){
+				if (app.user.attributes.user_list_name == "") {
 					app.mainRouter.navigate("#create", {
 						trigger: true,
 						replace: true
@@ -37,14 +37,14 @@ app.routers.MainRouter = Backbone.Router.extend({
 					app.viewHome.render(false);
 				}
 			},
-			error: function(collection,xhr,options) {
-				if(xhr.status==404){
+			error: function (collection, xhr, options) {
+				if (xhr.status == 404) {
 					app.listView.render(true);
 				}
 			}
 		});
 	},
-	createList: function(e){
+	createList: function (e) {
 		app.createListView = new app.views.CreateListView({model: app.user});
 		app.createListView.render();
 	},
@@ -81,7 +81,6 @@ app.routers.MainRouter = Backbone.Router.extend({
 		}
 	},
 	shareList: function (e) {
-
 		app.shareListView = new app.views.shareListView({
 			collection: new app.collections.ItemCollection()
 		});
