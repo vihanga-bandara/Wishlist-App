@@ -135,10 +135,10 @@ class User extends REST_Controller
 					"user_list_description" => $login_data->user_list_description
 				);
 				$message = array(
-					"id"=> $login_data->user_id,
+					"id" => $login_data->user_id,
 					"user_id" => $login_data->user_id,
 					"user_list_name" => $login_data->user_list_name,
-					"user_list_description" =>$login_data->user_list_description,
+					"user_list_description" => $login_data->user_list_description,
 					"status" => true,
 					"data" => $loginData,
 					"message" => "User successfully logged in"
@@ -180,7 +180,7 @@ class User extends REST_Controller
 			$user_list_name = $this->put("user_list_name", TRUE);
 			$user_list_description = $this->put("user_list_description", TRUE);
 
-			$response = $this->UserModel->updateUser($user_list_name, $user_list_description,$user_id);
+			$response = $this->UserModel->updateUser($user_list_name, $user_list_description, $user_id);
 			if ($response)
 			{
 				$responseData = array(
@@ -204,6 +204,7 @@ class User extends REST_Controller
 			}
 		}
 	}
+
 	/**
 	 * Get user details
 	 * -------------------------
@@ -211,16 +212,44 @@ class User extends REST_Controller
 	 * @url : api/user/{id}
 	 *
 	 */
-	public function single_user_get(){
+	public function single_user_get()
+	{
 		$last = $this->uri->total_segments();
 		$user_id = $this->uri->segment($last);
 		$userData = $this->UserModel->getSingleUserData($user_id);
-		if(($userData != null) && !empty($userData)){
+		if (($userData != null) && !empty($userData))
+		{
 			$this->response($userData);
 		}
 	}
+
+	/**
+	 * User Logout
+	 * -------------------------
+	 * -------------------------
+	 * @method : POST
+	 * @url : api/user/logout
+	 */
 	public function logout_post()
 	{
-		$this->session->sess_destroy();
+		$user_id = $this->session->user_id;
+		if ($this->session->sess_destroy())
+		{
+			$message = array(
+				"status" => true,
+				"user_id" => $user_id,
+				"message" => "User successfully logged out"
+			);
+			$this->response($message, REST_Controller::HTTP_OK);
+		} else
+		{
+			$message = array(
+				"status" => false,
+				"error" => $this->form_validation->error_array(),
+				"message" => "Error Logging out"
+			);
+		}
+		$this->response($user_id, REST_Controller::HTTP_BAD_REQUEST);
+
 	}
 }

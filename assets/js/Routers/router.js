@@ -12,20 +12,22 @@ app.routers.MainRouter = Backbone.Router.extend({
 		// "share": "shareList",
 	},
 	login: function (e) {
-		userJson = JSON.parse(localStorage.getItem("UserJson"));
-		if (userJson == null) {
+		UserJson = JSON.parse(localStorage.getItem("UserJson"));
+		if (UserJson == null) {
 			app.user = new app.models.User();
 			app.loginDisplay = new app.views.LoginView({
 				model: app.user
 			});
 			app.loginDisplay.render();
 		} else {
+			app.user = UserJson;
 			this.viewHome();
 		}
 	},
 	viewHome: function () {
-		userJson = JSON.parse(localStorage.getItem("UserJson"));
-		if (userJson != null) {
+		UserJson = JSON.parse(localStorage.getItem("UserJson"));
+		if (UserJson != null) {
+			app.user = UserJson;
 			//creation of collection
 			app.viewHome = new app.views.HomeView({collection: new app.collections.ItemCollection()});
 			var url = app.viewHome.collection.url;
@@ -47,10 +49,12 @@ app.routers.MainRouter = Backbone.Router.extend({
 				},
 				error: function (collection, xhr, options) {
 					if (xhr.status == 404) {
-						app.listView.render(true);
+						app.viewHome.render(true);
 					}
 				}
 			});
+		} else {
+			this.login();
 		}
 
 	},
@@ -92,7 +96,7 @@ app.routers.MainRouter = Backbone.Router.extend({
 	},
 	sharedLink: function (id) {
 		UserJson = JSON.parse(localStorage.getItem("UserJson"));
-		if (UserJson != null && app.user.get("user_id") == null) {
+		if (UserJson != null ) {
 			app.user = UserJson;
 			var getUserUrl = "/wishlist-app/api/user/" + id;
 			app.shareListView = new app.views.shareListView(

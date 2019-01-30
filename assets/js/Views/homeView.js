@@ -44,35 +44,19 @@ app.views.HomeView = Backbone.View.extend({
 	add_item: function (e) {
 		e.preventDefault();
 		e.stopPropagation();
-		if (!app.addItemView) {
-			app.mainRouter.navigate("#home/add", {
-				trigger: true,
-				replace: true
-			});
-		} else {
-			app.mainRouter.navigate("#home/add", {
-				trigger: true,
-				replace: true
-			});
-		}
-
+		app.mainRouter.navigate("#home/add", {
+			trigger: true,
+			replace: true
+		});
 	},
 	update_item: function (e) {
 		e.preventDefault();
 		e.stopPropagation();
 		var id = $(e.currentTarget).val();
-		if (!app.updateItemView) {
-			app.mainRouter.navigate("#home/update/" + id, {
-				trigger: true,
-				replace: true
-			});
-		} else if (app.updateItemView) {
-			app.mainRouter.navigate("#home/update/" + id, {
-				trigger: true,
-				replace: true
-			});
-		}
-
+		app.mainRouter.navigate("#home/update/" + id, {
+			trigger: true,
+			replace: true
+		});
 	},
 	delete_item: function (e) {
 		e.preventDefault();
@@ -96,26 +80,20 @@ app.views.HomeView = Backbone.View.extend({
 	share_list: function (e) {
 		e.preventDefault();
 		e.stopPropagation();
-		if (!app.updateItemView) {
-			app.mainRouter.navigate("#share/"+ app.user.get("user_id"), {
-				trigger: true,
-				replace: true
-			});
-		} else {
-			app.mainRouter.navigate("#share", {
-				trigger: true,
-				replace: true
-			});
-		}
-
+		app.mainRouter.navigate("#share/" + app.user.get("user_id"), {
+			trigger: true,
+			replace: true
+		});
 	},
-	view_list_link : function(e){
+	view_list_link: function (e) {
 		e.preventDefault();
 		e.stopPropagation();
-		var link = "localhost/wishlist-app/#share/" +  app.user.get("user_id");
+		var link = "localhost/wishlist-app/#share/" + app.user.get("user_id");
 		$("#show-link").html(link).show();
 	},
 	logout: function () {
+		localStorage.removeItem("UserJson");
+
 		window.location.href = "http://localhost/wishlist-app/";
 	}
 });

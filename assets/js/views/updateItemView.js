@@ -4,7 +4,7 @@ app.views.updateItemView = Backbone.View.extend({
 	el: ".container-update",
 	render: function () {
 		template = _.template($('#update-item-template').html());
-		$(".container-main").hide();
+		hideElement();
 		$(".container-update").show();
 		this.$el.append(template(this.model.attributes));
 	},

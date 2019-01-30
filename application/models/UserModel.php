@@ -72,7 +72,7 @@ class UserModel extends CI_Model
 		}
 	}
 
-// public function logoutUser(){
-// 	session_unset();
-// }
+ public function logoutUser(){
+ 	session_unset();
+ }
 }

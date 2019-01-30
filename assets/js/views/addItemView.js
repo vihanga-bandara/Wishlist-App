@@ -3,11 +3,10 @@ var app = app || {};
 app.views.addItemView = Backbone.View.extend({
 	el: ".container-add",
 	render: function () {
-		$(".container-main").hide();
+		hideElement();
 		$(".container-add").show();
 		template = _.template($('#add-item-template').html());
 		this.$el.append(template(this.model.attributes));
-
 	},
 	events: {
 		"click #js-btn-add": "add_item",

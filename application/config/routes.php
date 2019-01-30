@@ -87,6 +87,9 @@ $route['api/user/register'] = 'api/user/register_user';
 //Login
 $route['api/user/login'] = 'api/user/login_user';
 
+//Logout
+$route['api/user/logout'] = 'api/user/logout';
+
 //get single user details
 $route['api/user/(:num)'] = 'api/user/single_user';
 
