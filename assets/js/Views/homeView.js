@@ -93,7 +93,16 @@ app.views.HomeView = Backbone.View.extend({
 	},
 	logout: function () {
 		localStorage.removeItem("UserJson");
+		var url = app.user.url + "logout"
+		app.user.set("id", null);
+		app.user.save(app.user.attributes, {
+			"url": url,
+			success: function (model, response) {
+				notify("You have been successfully logged out!");
+				localStorage.removeItem("UserJson");
+				window.location.href = "http://localhost/wishlist-app/";
+			}
+		});
 
-		window.location.href = "http://localhost/wishlist-app/";
 	}
 });

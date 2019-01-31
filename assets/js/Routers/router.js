@@ -20,14 +20,14 @@ app.routers.MainRouter = Backbone.Router.extend({
 			});
 			app.loginDisplay.render();
 		} else {
-			app.user = UserJson;
+			app.user = new app.models.User(UserJson)
 			this.viewHome();
 		}
 	},
 	viewHome: function () {
 		UserJson = JSON.parse(localStorage.getItem("UserJson"));
 		if (UserJson != null) {
-			app.user = UserJson;
+			app.user = new app.models.User(UserJson)
 			//creation of collection
 			app.viewHome = new app.views.HomeView({collection: new app.collections.ItemCollection()});
 			var url = app.viewHome.collection.url;
@@ -86,7 +86,6 @@ app.routers.MainRouter = Backbone.Router.extend({
 			app.updateItemView = new app.views.updateItemView({
 				model: newVal
 			});
-			// app.updateItemView = app.listView;
 			cleanHTML();
 			app.updateItemView.render();
 		} else if (app.updateItemView) {
@@ -97,7 +96,7 @@ app.routers.MainRouter = Backbone.Router.extend({
 	sharedLink: function (id) {
 		UserJson = JSON.parse(localStorage.getItem("UserJson"));
 		if (UserJson != null ) {
-			app.user = UserJson;
+			app.user = new app.models.User(UserJson)
 			var getUserUrl = "/wishlist-app/api/user/" + id;
 			app.shareListView = new app.views.shareListView(
 				{collection: new app.collections.ItemCollection(), model: new app.models.User()});

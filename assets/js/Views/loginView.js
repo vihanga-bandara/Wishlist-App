@@ -16,24 +16,25 @@ app.views.LoginView = Backbone.View.extend({
 	},
 	login: function (e) {
 		e.preventDefault();
-        e.stopPropagation();
+		e.stopPropagation();
 		var validationResponse = Form_Login_Validation();
 		if (typeof (validationResponse) == "object") {
 			this.model.set(validationResponse);
 			var urlPost = this.model.url + "login";
 			this.model.save(this.model.attributes, {
 				"url": urlPost,
+				wait:true,
 				success: function (model, response) {
-                    var userJson = JSON.stringify(model);
-                    localStorage.setItem("UserJson",userJson);
+					var userJson = JSON.stringify(model);
+					localStorage.setItem("UserJson", userJson);
 					app.mainRouter.navigate("#home", {
 						trigger: true,
 						replace: true
 					});
-				},
-				error: function (e) {
-					$("#errorsTab").html("Cannot Login due to a server error").show().fadeOut(5000);
 				}
+				// error: function (e) {
+				// 	$("#errorsTab").html("Cannot Login due to a server error").show().fadeOut(5000);
+				// }
 			});
 		} else {
 			$("#errorsTab").html(validationResponse)
@@ -49,26 +50,28 @@ app.views.LoginView = Backbone.View.extend({
 			this.model.set(validationResponse);
 			var url = this.model.url + "register";
 			this.model.save(this.model.attributes, {
-                "url": url,
-                wait:true,
+				"url": url,
+				wait: true,
 				success: function (model, response) {
 					$("#home-tab").click();
-                    $("#errorsTab").html("Registration was successful").show().fadeOut(5000);;
+					notify("Registration successful!");
 				},
 				error: function () {
-					$("#errorsTabReg").html("Registration was unsuccessful").show().fadeOut(5000);;
+					$("#errorsTabReg").html("Registration was unsuccessful").show().fadeOut(5000);
+					;
 				}
 			});
-		}  else {
+		} else {
 			$("#errorsTabReg").html(validationResponse)
 				.show()
 				.fadeOut(5000);
 		}
 	},
 	onFocusInput: function (e) {
-        e.preventDefault();
+		e.preventDefault();
 		e.stopPropagation();
 		this.$el.find('#errorsTab')
-			.hide().fadeOut();;
+			.hide().fadeOut();
+		;
 	}
 });

@@ -8,6 +8,7 @@
 		z-index: 10;
 		margin-top: -24px;
 	}
+
 	.container {
 		/*background-color: #9b59b6;*/
 		max-width: 100%;
@@ -321,6 +322,11 @@
 		padding: 5px 0;
 		margin: 6px 0;
 	}
+
+	.logout-btn {
+		margin-right: 5px;
+	}
+
 </style>
 
 <body>
@@ -432,32 +438,40 @@
 
 	<br>
 	<div style="text-align: center">
-		<h1><%=user_list_name%></h1>
-		<h2><%=user_list_description%></h2>
+		<h1 class="list-name"><%=user_list_name%></h1>
+		<h2 class="list-des"><%=user_list_description%></h2>
 	</div>
 	<h1 id="#no-items"></h1>
 	<div id="item_position">
-		<button id="btn-add-item" class="btn btn-success btn-xs pull-right" style="margin-left: 9px;">Add Item</button>
-		<button id="btn-share-list" class="btn btn-primary btn-xs pull-right">Go to Share List</button>
-		<button  id="btn-view-list" class="btn btn-primary btn-xs pull-right">Get Share Link</button>
-<!--		<button type="button" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="top" data-content="hi hihihi">-->
-<!--			Get Shared URL-->
-<!--		</button>-->
-		<button id="btn-logout" class="btn btn-danger btn-xs pull-right" style="text-align: right">Logout</button>
-		<label><span id="show-link" class="banda-style"></span></textarea></label>
-		<div class="row no-gutters tab-head">
-			<div class="col-md-12">
-				<div class="row no-gutters">
-					<div class="col-md-1 pad-give">ID</div>
-					<div class="col-md-2 pad-give">Name</div>
-					<div class="col-md-1 pad-give">price</div>
-					<div class="col-md-3 pad-give">Url</div>
-					<div class="col-md-2 pad-give">Item Priority</div>
-					<div class="col-md-2 pad-give"></div>
+		<button id="btn-add-item" class="btn btn-success btn-xs pull-right float-left"><i
+				class="fas fa-plus" style="margin-right: 7px;"></i>Add Item
+		</button>
+		<button id="btn-logout" class="btn btn-danger btn-xs pull-right logout-btn float-right"
+				style="text-align: right"><i
+				class="fas fa-sign-out-alt" style="margin-right: 7px;"></i>Logout
+		</button>
+<!--		<button id="btn-share-list" class="btn btn-primary btn-xs pull-right float-right">Go to Share List</button>-->
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+			<i class="fas fa-share-alt"
+			   style="margin-right: 7px;"></i>Get Share
+			Link
+		</button>
+		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+			 aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body text-center">
+						localhost/wishlist-app/#share/<%=user_id%>
+					</div>
+
 				</div>
 			</div>
 		</div>
-
 	</div>
 
 </script>
@@ -467,14 +481,17 @@
 	<div id="placing">
 		<br>
 		<div style="text-align: center">
-			<h1><%=user_list_name%></h1>
-			<h2><%=user_list_description%></h2>
+			<h1 class="list-name"><%=user_list_name%></h1>
+			<h2 class="list-des"><%=user_list_description%></h2>
 		</div>
-		<button id="go-back" class="btn btn-primary">Go back</button>
-		<button id="btn-copy-link" class="btn btn-success">Copy Link to clipboard</button>
 		<span id="show_url"></span>
-
-		<div class="row no-gutters tab-head">
+		<br>
+		<div style="text-align: center" class="d-none">
+			<h1 class="list-name"><%=user_list_name%></h1>
+			<h2 class="list-des"><%=user_list_description%></h2>
+		</div>
+		<h1 id="#no-items"></h1>
+		<!--<div class="row no-gutters tab-head">
 			<div class="col-md-12">
 				<div class="row no-gutters">
 					<div class="col-md-1 pad-give">ID</div>
@@ -484,13 +501,13 @@
 					<div class="col-md-2 pad-give">Item Priority</div>
 				</div>
 			</div>
-		</div>
+		</div>-->
 	</div>
 
 </script>
 
 <script type="text/template" id="add-item-template">
-	<div class="row">
+	<div class="row no-gutters">
 		<div class="col-md-6 offset-md-3 banda-cust">
 			<form>
 				<div class="form-group">
@@ -547,7 +564,7 @@
 </script>
 
 <script type="text/template" id="update-item-template">
-	<div class="row">
+	<div class="row no-gutters">
 		<div class="col-md-6 offset-md-3 banda-cust">
 			<form>
 				<div class="form-group">
@@ -596,11 +613,11 @@
 						</option>
 						<option value="1">Must Have</option>
 						<option value="2">Would be Nice to Have</option>
-						<option value="3">If You Can</option>
+						<option value="3">Not Needed</option>
 					</select>
 				</div>
 				<div class="form-group">
-					<button id="js-btn-add" class='btn btn-success' value="add item">Add Item</a></button>
+					<button id="js-btn-add" class='btn btn-success' value="add item">Update Item</a></button>
 					<button id="go-back" class=' btn btn-primary' value="Go Back">Go Back</a></button>
 				</div>
 			</form>
@@ -610,9 +627,47 @@
 </script>
 
 <script type="text/template" id="item-template">
-	<div class="row mar">
-		<div class="col-md-12 custyle">
 
+	<div class="row no-gutters">
+		<div class="col-md-6 offset-md-3 card-wrap">
+			<div class="card card-list">
+				<div class="card-body">
+					<div class="row">
+						<div class="col-md-6">
+							<h5 class="card-title"><%=item_name%></h5>
+						</div>
+						<div class="col-md-6 text-right">
+							<button class='btn btn-info btn-xs edit' value="<%=item_id%>" id="btn-update-item">
+								<span class="glyphicon glyphicon-edit"></span> <i
+									class="material-icons">&#xE254;</i>
+							</button>
+							<button class="btn btn-danger btn-xs delete" value="<%=item_id%>" id="btn-delete-item">
+								<span class="glyphicon glyphicon-remove "></span><i
+									class="material-icons">&#xE872;</i>
+							</button>
+						</div>
+					</div>
+					<p class="card-text">
+						<%=item_description%>
+					</p>
+					<p class="card-text pri-li">Rs.<%=item_price%></p>
+					<p class="card-text pri-li">
+						Priority : <b><%if(item_priority =='1'){%>
+							Must Have
+							<%}else if(item_priority =='2'){%>
+							Would be Nice to Have
+							<%}else{%>
+							Not needed<%}%></b>
+					</p>
+					<a href="<%=item_url%>" target="_blank"><%=item_url%></a>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<!--<div class="row mar">
+		<div class="col-md-12 custyle">
 			<div class="row no-gutters">
 				<div class="col-md-1 pad-give"><%=item_id%></div>
 				<div class="col-md-2 pad-give"><%=item_name%></div>
@@ -627,16 +682,16 @@
 				</div>
 				<div class="col-md-2 pad-give text-right">
 					<button class='btn btn-info btn-xs' value="<%=item_id%>" id="btn-update-item">
-						<span class="glyphicon glyphicon-edit"></span> Edit
+						<span class="glyphicon glyphicon-edit"></span> <i class="far fa-edit"></i>
 					</button>
 					<button class="btn btn-danger btn-xs" value="<%=item_id%>" id="btn-delete-item">
-						<span class="glyphicon glyphicon-remove "></span> Delete
+						<span class="glyphicon glyphicon-remove "></span><i class="fas fa-trash-alt"></i>
 					</button>
 				</div>
 
 			</div>
 		</div>
-	</div>
+	</div>-->
 
 </script>
 
@@ -645,30 +700,42 @@
 </script>
 
 <script type="text/template" id="item-template-share">
-	<div class="row mar">
-		<div class="col-md-12 custyle">
-			<div class="row no-gutters">
-				<div class="col-md-1 pad-give"><%=item_id%></div>
-				<div class="col-md-2 pad-give"><%=item_name%></div>
-				<div class="col-md-1 pad-give">Rs.<%=item_price%></div>
-				<div class="col-md-3 pad-give show-url"><a href="<%=item_url%>" target="_blank"><%=item_url%></a></div>
-				<div class="col-md-2 pad-give"><%if(item_priority =='1'){%>
-					Must Have
-					<%}else if(item_priority =='2'){%>
-					Would be Nice to Have
-					<%}else{%>
-					Not needed<%}%>
+
+	<div class="row no-gutters">
+		<div class="col-md-6 offset-md-3 card-wrap">
+			<div class="card card-list">
+				<div class="card-body">
+					<div class="row">
+						<div class="col-md-6">
+							<h5 class="card-title"><%=item_name%></h5>
+						</div>
+					</div>
+					<p class="card-text">
+						<%=item_description%>
+					</p>
+					<p class="card-text pri-li">Rs.<%=item_price%></p>
+					<p class="card-text pri-li">
+						Priority : <b><%if(item_priority =='1'){%>
+							Must Have
+							<%}else if(item_priority =='2'){%>
+							Would be Nice to Have
+							<%}else{%>
+							Not needed<%}%></b>
+					</p>
+					<a href="<%=item_url%>" target="_blank"><%=item_url%></a>
 				</div>
 			</div>
+
 		</div>
 	</div>
+
 </script>
 
 <div class="container"></div>
 
 <div class="container-create-list" style="margin:9%;"></div>
 
-<div class="container-main" style="margin: 5%;"></div>
+<div class="container-main" style="margin: 2%;"></div>
 
 <div class="container-add"></div>
 
@@ -679,6 +746,125 @@
 
 </body>
 </html>
+<style>
+	.card-link {
+		border: 1px solid #ffffff;
+		padding: 4px 10px;
+		font-size: 14px;
+		color: #ffffff;
+		border-radius: 4px;
 
+	}
 
+	.card-link:hover {
+		color: #000000;
+		background-color: #ffffff;
+	}
 
+	.pri-li {
+		margin-bottom: 5px;
+	}
+
+	.card-list {
+		margin-bottom: 5px;
+		border-radius: 10px;
+		background-color: #000000;
+	}
+
+	.card-list p, h5 {
+		color: #ffffff;
+	}
+
+	.card-wrap {
+		padding: 0 60px !important;
+		margin-top: 15px;
+	}
+
+	.card-body {
+		padding: 25px !important;
+	}
+
+	.edit {
+		color: #FFC107;
+		background-color: transparent;
+		border: none;
+		padding: 0 !important;
+	}
+
+	.delete {
+		color: #E34724;
+		background-color: transparent;
+		border: none;
+		padding: 0 !important;
+	}
+
+	.edit:hover {
+		color: #FFC107;
+		background-color: transparent;
+		border: none;
+	}
+
+	.delete:hover {
+		color: #E34724;
+		background-color: transparent;
+		border: none;
+	}
+
+	.list-name {
+		font-family: 'Montserrat', sans-serif;
+		font-size: 43px;
+		margin-bottom: 0;
+		color: #5a5a5a;
+	}
+
+	.list-des {
+		font-family: 'Montserrat', sans-serif;
+		margin: 6px 0;
+	}
+
+	.card-wrap .btn-danger.focus, .btn-danger:focus {
+		box-shadow: none;
+	}
+
+	.card-wrap .btn-danger:not(:disabled):not(.disabled).active, .btn-danger:not(:disabled):not(.disabled):active, .show > .btn-danger.dropdown-toggle {
+		color: #E34724;
+		background-color: transparent;
+		border-color: transparent;
+	}
+
+	.card-wrap .btn-danger:not(:disabled):not(.disabled).active:focus, .btn-danger:not(:disabled):not(.disabled):active:focus, .show > .btn-danger.dropdown-toggle:focus {
+		box-shadow: none !important;
+	}
+
+	.card-wrap .btn-info:not(:disabled):not(.disabled).active, .btn-info:not(:disabled):not(.disabled):active, .show > .btn-info.dropdown-toggle {
+		color: #FFC107;
+		background-color: transparent;
+		border-color: transparent;
+	}
+
+	.card-wrap .btn-info.focus, .btn-info:focus {
+		box-shadow: none;
+	}
+
+	.modal-header {
+		padding: 3px 8px;
+		border-bottom: none;
+		position: absolute;
+		right: 0;
+	}
+
+	@media (min-width: 576px){
+		.modal-dialog {
+			max-width: 500px;
+			margin: 22% auto !important;
+		}
+	}
+
+	#btn-add-item{
+		margin-right: 5px;
+	}
+
+	#btn-share-list{
+		margin-right: 5px;
+	}
+</style>

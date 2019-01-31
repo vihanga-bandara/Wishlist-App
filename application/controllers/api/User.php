@@ -233,8 +233,10 @@ class User extends REST_Controller
 	public function logout_post()
 	{
 		$user_id = $this->session->user_id;
-		if ($this->session->sess_destroy())
+		if ($user_id != null)
 		{
+			$this->session->sess_destroy();
+			$this->UserModel->deactivateUser($user_id);
 			$message = array(
 				"status" => true,
 				"user_id" => $user_id,
@@ -248,8 +250,9 @@ class User extends REST_Controller
 				"error" => $this->form_validation->error_array(),
 				"message" => "Error Logging out"
 			);
+			$this->response($message, REST_Controller::HTTP_BAD_REQUEST);
 		}
-		$this->response($user_id, REST_Controller::HTTP_BAD_REQUEST);
+
 
 	}
 }
