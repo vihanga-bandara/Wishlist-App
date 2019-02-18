@@ -1,4 +1,4 @@
-### WISHLIST APPLICATION ### REST ## BACKBONE ## CODEIGNITER
+### WISHLIST APPLICATION ### REST ## BACKBONE ## CODEIGNITER ##JAVSCRIPT #JQUERY
 
 A final year advanced server side coursework where i had to create a wishlist that could do CRUD operations along with sharing a link for others to see his/her list by using Backbone.js as the front end for MV* and CodeIgniter and REST APIs for backend development and APIs.
 
